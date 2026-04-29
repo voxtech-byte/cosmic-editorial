@@ -110,8 +110,8 @@ export function AsistenAIPage() {
   };
 
   return (
-    <main className="pt-24 md:pt-32 pb-24 px-page max-w-[1400px] mx-auto w-full min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-start">
+    <main className="pt-24 md:pt-32 pb-24 px-4 md:px-8 lg:px-12 max-w-[1600px] mx-auto w-full min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
         
         {/* ── Chat Section (7 Columns) ────────────────── */}
         <section className="md:col-span-7 flex flex-col h-[calc(100vh-200px)]">
@@ -128,7 +128,7 @@ export function AsistenAIPage() {
             {/* Conversation Area */}
             <div 
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide"
+              className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scrollbar-hide"
             >
               {messages.length === 0 && !isStreaming && (
                 <div className="h-full flex flex-col items-center justify-center text-center p-8">
@@ -149,7 +149,7 @@ export function AsistenAIPage() {
                   key={i} 
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                 >
-                  <div className={`flex gap-4 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                  <div className={`flex gap-3 md:gap-4 max-w-[95%] md:max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                     <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                       msg.role === 'user' ? 'bg-science/20 text-science' : 'bg-ai-accent/20 text-ai-accent'
                     }`}>
@@ -157,7 +157,7 @@ export function AsistenAIPage() {
                     </div>
                     <div className={`p-4 rounded-2xl ${
                       msg.role === 'user' 
-                        ? 'bg-surface-high border border-white/5 text-text-primary' 
+                        ? 'bg-surface-high border border-white/5 text-text-primary shadow-lg' 
                         : 'bg-space-void/40 border border-ai-accent/10 text-text-muted shadow-inner'
                     }`}>
                       <MarkdownRenderer content={msg.content} />
@@ -168,7 +168,7 @@ export function AsistenAIPage() {
 
               {isStreaming && streamingContent && (
                 <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2">
-                  <div className="flex gap-4 max-w-[85%]">
+                  <div className="flex gap-3 md:gap-4 max-w-[95%] md:max-w-[85%]">
                     <div className="shrink-0 w-8 h-8 rounded-full bg-ai-accent/20 text-ai-accent flex items-center justify-center animate-pulse">
                       <Bot className="w-4 h-4" />
                     </div>

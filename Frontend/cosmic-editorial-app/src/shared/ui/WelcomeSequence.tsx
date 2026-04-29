@@ -61,16 +61,16 @@ export function WelcomeSequence() {
           
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             {[
-              { name: 'Alya Syifa A', img: '/Alya.jpeg' },
-              { name: 'Nayla Amalia Kirana JR', img: '/nayla amalia.jpeg' },
-              { name: 'Michel Avrillia Putri', img: '/Michel.jpeg' }
+              { name: 'Alya Syifa A', img: '/Alya.jpeg', pos: 'object-center' },
+              { name: 'Nayla Amalia Kirana JR', img: '/nayla amalia.jpeg', pos: 'object-center' },
+              { name: 'Michel Avrillia Putri', img: '/Michel.jpeg', pos: 'object-top' }
             ].map((member, i) => (
               <div key={i} className="flex flex-col items-center group/member">
                 <div className="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden mb-4 border-2 border-white/5 group-hover/member:border-science/50 transition-all duration-500 shadow-2xl">
                   <img 
                     src={member.img} 
                     alt={member.name} 
-                    className="w-full h-full object-cover grayscale group-hover/member:grayscale-0 transition-all duration-700 scale-105 group-hover/member:scale-100" 
+                    className={`w-full h-full object-cover ${member.pos} grayscale group-hover/member:grayscale-0 transition-all duration-700 scale-105 group-hover/member:scale-100`} 
                   />
                 </div>
                 <span className="font-[Space_Grotesk,sans-serif] text-[11px] md:text-xs font-bold tracking-widest text-text-muted uppercase group-hover/member:text-science transition-colors">
