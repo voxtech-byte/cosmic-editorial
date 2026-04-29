@@ -9,16 +9,15 @@ export function BerandaPage() {
     <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1400px] mx-auto w-full">
       {/* ── Atmospheric Background Glows ─────────── */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute -top-[20%] -inset-s-[10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.12)_0%,transparent_70%)]" />
-        <div className="absolute -bottom-[20%] -inset-e-[10%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(231,195,101,0.06)_0%,transparent_70%)]" />
+        <div className="absolute top-[-20%] inset-s-[-10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.12)_0%,transparent_70%)]" />
+        <div className="absolute bottom-[-20%] inset-e-[-10%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(231,195,101,0.06)_0%,transparent_70%)]" />
       </div>
 
       {/* ── Hero Section ────────────────────────────── */}
       <header className="min-h-[60vh] flex flex-col justify-center relative mb-16 md:mb-24">
         {/* Background image with opacity blend */}
         <div
-          className="absolute inset-e-0 top-0 w-2/3 h-full opacity-15 bg-cover bg-center mix-blend-screen rounded-3xl hidden md:block"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&auto=format')` }}
+          className="absolute inset-e-0 top-0 w-2/3 h-full opacity-15 bg-cover bg-center mix-blend-screen rounded-3xl hidden md:block bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&auto=format')]"
         />
 
         <div className="relative z-10 max-w-4xl">
@@ -34,10 +33,15 @@ export function BerandaPage() {
             <span className="text-science">Luar Angkasa</span>
           </h1>
 
-          {/* Subheadline with border accent */}
-          <p className="font-[Newsreader,serif] text-lg md:text-xl text-text-muted max-w-2xl ms-8 md:ms-12 border-s-2 border-border ps-6 leading-relaxed">
-            Sintesis antara sains empiris dan refleksi teologis. Menjelajahi kebesaran alam semesta melalui lensa ilmu pengetahuan dan cahaya wahyu Al-Qur'an.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-8 ms-8 md:ms-12">
+            <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-[0.2em] uppercase text-text-muted">
+              Proyek Kokulikuler R&D
+            </div>
+            <div className="hidden md:block w-8 h-px bg-white/20" />
+            <p className="font-[Newsreader,serif] text-lg text-text-muted max-w-lg leading-relaxed">
+              Sintesis harmoni antara data astrofisika modern dan kedalaman makna Ayat Kauniyah untuk MTs Sains Algebra.
+            </p>
+          </div>
 
           {/* CTA */}
           <Link
@@ -50,106 +54,154 @@ export function BerandaPage() {
         </div>
       </header>
 
-      {/* ── Cosmic Scale Numbers (Wow Factor) ───────── */}
-      <section className="mb-24 md:mb-32 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 border-y border-border py-12 scroll-reveal">
-        <div className="text-center md:text-start">
-          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3rem,5vw,5rem)] font-bold text-science block leading-none mb-2">
+      {/* ── Cosmic Scale Numbers (Staggered Asymmetry) ───────── */}
+      <section className="mb-24 md:mb-48 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 border-y border-border py-20 scroll-reveal">
+        <div className="text-center md:text-start md:mt-0">
+          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3.5rem,6vw,6rem)] font-bold text-science block leading-none mb-2">
             13.8<span className="text-2xl text-text-dim">M</span>
           </span>
-          <p className="font-[Space_Grotesk,sans-serif] text-sm uppercase tracking-widest text-text-muted font-bold">
+          <p className="font-[Space_Grotesk,sans-serif] text-xs uppercase tracking-[0.4em] text-text-muted font-black">
             Tahun Umur Semesta
           </p>
         </div>
-        <div className="text-center md:text-start md:border-s border-border md:ps-12">
-          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3rem,5vw,5rem)] font-bold text-reflection block leading-none mb-2">
+        <div className="text-center md:text-start md:border-s border-border md:ps-12 md:mt-12">
+          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3.5rem,6vw,6rem)] font-bold text-reflection block leading-none mb-2">
             200<span className="text-2xl text-text-dim">M+</span>
           </span>
-          <p className="font-[Space_Grotesk,sans-serif] text-sm uppercase tracking-widest text-text-muted font-bold">
+          <p className="font-[Space_Grotesk,sans-serif] text-xs uppercase tracking-[0.4em] text-text-muted font-black">
             Galaksi Teramati
           </p>
         </div>
-        <div className="text-center md:text-start md:border-s border-border md:ps-12">
-          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3rem,5vw,5rem)] font-bold text-ai-accent block leading-none mb-2">
+        <div className="text-center md:text-start md:border-s border-border md:ps-12 md:mt-24">
+          <span className="font-[Space_Grotesk,sans-serif] text-[clamp(3.5rem,6vw,6rem)] font-bold text-ai-accent block leading-none mb-2">
             100<span className="text-2xl text-text-dim">%</span>
           </span>
-          <p className="font-[Space_Grotesk,sans-serif] text-sm uppercase tracking-widest text-text-muted font-bold">
+          <p className="font-[Space_Grotesk,sans-serif] text-xs uppercase tracking-[0.4em] text-text-muted font-black">
             Tunduk Pada Sunnatullah
           </p>
         </div>
       </section>
 
-      {/* ── Bento Grid: Phenomena (7/5 Asymmetric Split) ── */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 lg:gap-8">
+      {/* ── Bento Grid: Phenomena ────────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-24 mb-48">
         {/* Featured Card — 7 columns, 2 rows */}
         <Link
           to={`/eksplorasi?id=${PHENOMENA[0].id}`}
           className="col-span-12 md:col-span-7 md:row-span-2 group"
         >
-          <GlassCard hover className="h-full min-h-[400px] md:min-h-[500px] flex flex-col justify-end relative">
-            {/* Background Image */}
+          <GlassCard hover className="h-full min-h-[500px] flex flex-col justify-end relative overflow-hidden">
+            {/* Background Image with Parallax-like feel */}
             <div
-              className="absolute inset-0 rounded-2xl bg-cover bg-center opacity-40 group-hover:opacity-50 transition-opacity duration-700"
-              style={{ backgroundImage: `url('${PHENOMENA[0].heroImage}')` }}
+              className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-1000 bg-[image:var(--bg-image)]"
+              style={{ '--bg-image': `url('${PHENOMENA[0].heroImage}')` } as React.CSSProperties}
             />
-            <div className="absolute inset-0 rounded-2xl bg-linear-to-t from-space-dark via-space-dark/60 to-transparent" />
-
-            {/* Nebula Accent */}
-            <span className="absolute -top-12 -inset-e-12 w-40 h-40 bg-science/10 rounded-full blur-3xl" />
-
-            <div className="relative z-10">
-              <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-[Space_Grotesk,sans-serif] tracking-widest text-science border border-science/30 rounded-full uppercase mb-4">
+            <div className="absolute inset-0 bg-linear-to-t from-space-dark via-space-dark/80 to-transparent" />
+            
+            <div className="relative z-10 p-4 md:p-8">
+              <span className="inline-flex items-center gap-2 px-4 py-1 text-[10px] font-bold tracking-[0.2em] text-science border border-science/30 rounded-full uppercase mb-6 bg-science/5">
                 <Sparkles className="w-3 h-3" />
-                {CATEGORY_META[PHENOMENA[0].category].label}
+                Featured Phenomenon
               </span>
-              <h2 className="font-[Space_Grotesk,sans-serif] text-[clamp(1.5rem,3vw+1rem,2.5rem)] font-bold text-text-primary leading-tight mb-3">
+              <h2 className="font-[Space_Grotesk,sans-serif] text-4xl md:text-6xl font-bold text-text-primary leading-[0.85] mb-4 tracking-tighter">
                 {PHENOMENA[0].title}
               </h2>
-              <p className="font-[Manrope,sans-serif] text-sm text-text-muted max-w-lg line-clamp-3">
+              <p className="font-[Manrope,sans-serif] text-sm text-text-muted max-w-md line-clamp-3 leading-relaxed">
                 {PHENOMENA[0].description}
               </p>
             </div>
           </GlassCard>
         </Link>
 
-        {/* Supporting Cards — 5 columns */}
-        {PHENOMENA.slice(1).map((phenomenon) => (
-          <Link
-            key={phenomenon.id}
-            to={`/eksplorasi?id=${phenomenon.id}`}
-            className="col-span-12 md:col-span-5 group"
-          >
-            <GlassCard hover className="h-full min-h-[200px] flex flex-col justify-between">
-              {/* Category Badge */}
-              <div className="flex items-center justify-between mb-4">
-                <span className={`text-xs font-[Space_Grotesk,sans-serif] uppercase tracking-[0.2em] font-bold ${CATEGORY_META[phenomenon.category].color}`}>
-                  {CATEGORY_META[phenomenon.category].label}
-                </span>
-                <ArrowRight className="w-4 h-4 text-text-dim group-hover:text-science group-hover:translate-x-1 transition-all" />
-              </div>
+        {/* Supporting Cards */}
+        {PHENOMENA.slice(1).map((phenomenon, i) => {
+          // i=0 is Index 1, i=1 is Index 2, etc.
+          // i=0 and i=1 should be col-5 to fit next to featured (col-7)
+          // i >= 2 should be col-6 to fill rows below
+          const isSideCard = i < 2;
+          const colSpan = isSideCard ? 'md:col-span-5' : 'md:col-span-6';
+          const margin = isSideCard 
+            ? (i === 0 ? 'md:mt-32' : 'md:-mt-16') 
+            : 'md:mt-0';
 
-              <div>
-                <h3 className="font-[Space_Grotesk,sans-serif] text-xl font-bold text-text-primary mb-2 leading-tight">
-                  {phenomenon.title}
-                </h3>
-                <p className="font-[Manrope,sans-serif] text-sm text-text-muted line-clamp-2">
-                  {phenomenon.description}
-                </p>
-              </div>
+          return (
+            <Link
+              key={phenomenon.id}
+              to={`/eksplorasi?id=${phenomenon.id}`}
+              className={`col-span-12 ${colSpan} group ${margin}`}
+            >
+              <GlassCard hover className="h-full min-h-[350px] flex flex-col justify-end p-0 overflow-hidden relative border-white/5 hover:border-white/10">
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-70 group-hover:scale-110 group-hover:opacity-90 transition-all duration-1000 bg-[image:var(--bg-image)]"
+                  style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-space-dark via-space-dark/80 to-transparent" />
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mt-4">
-                {phenomenon.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-[10px] font-mono border border-border text-text-dim rounded"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </GlassCard>
-          </Link>
-        ))}
+                {/* Content Area */}
+                <div className="relative z-10 p-8 flex flex-col justify-between h-full">
+                  <div className="flex items-center justify-between mb-auto">
+                    <div className="flex items-center gap-2 px-3 py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
+                      <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_META[phenomenon.category].color}`} />
+                      <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${CATEGORY_META[phenomenon.category].color}`}>
+                        {CATEGORY_META[phenomenon.category].label}
+                      </span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-space-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-science group-hover:text-space-dark transition-all">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="mt-12">
+                    <h3 className="font-[Space_Grotesk,sans-serif] text-2xl font-bold text-text-primary mb-3 leading-tight group-hover:text-science transition-colors">
+                      {phenomenon.title}
+                    </h3>
+                    <p className="font-[Manrope,sans-serif] text-sm text-text-muted line-clamp-2 leading-relaxed">
+                      {phenomenon.description}
+                    </p>
+                  </div>
+                </div>
+              </GlassCard>
+            </Link>
+          );
+        })}
+      </section>
+
+      {/* ── Pilar STEM (Asymmetric 5:7) ────────────────── */}
+      <section className="mt-48 md:mt-64 scroll-reveal">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-center">
+          <div className="md:col-span-4 space-y-12">
+            <h2 className="font-[Space_Grotesk,sans-serif] text-4xl md:text-6xl font-bold text-text-primary leading-none tracking-tighter">
+              Pilar <br />
+              <span className="text-science">STEM</span>
+            </h2>
+            <div className="space-y-12">
+              {[
+                { title: 'Sains', desc: 'Hukum fisika semesta sebagai Sunnatullah.' },
+                { title: 'Teknologi', desc: 'AI & Observatorium Digital.' }
+              ].map((p, i) => (
+                <div key={i} className="group border-s-2 border-white/5 ps-6 hover:border-science transition-colors">
+                  <h4 className="font-bold text-text-primary text-xl mb-2">{p.title}</h4>
+                  <p className="text-sm text-text-muted leading-relaxed">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:mt-12">
+              <GlassCard className="h-full min-h-[300px] flex flex-col justify-center p-12 bg-reflection/5 border-reflection/10">
+                <h4 className="font-bold text-reflection text-2xl mb-4">Engineering</h4>
+                <p className="text-sm text-text-muted leading-relaxed">Desain wahana antariksa dan instrumen observasi sebagai solusi teknis eksplorasi manusia.</p>
+              </GlassCard>
+            </div>
+            <div>
+              <GlassCard className="h-full min-h-[300px] flex flex-col justify-center p-12 bg-ai-accent/5 border-ai-accent/10">
+                <h4 className="font-bold text-ai-accent text-2xl mb-4">Mathematics</h4>
+                <p className="text-sm text-text-muted leading-relaxed">Kalkulasi presisi periode revolusi dan penghitungan jarak dalam skala Tahun Cahaya.</p>
+              </GlassCard>
+            </div>
+          </div>
+        </div>
       </section>
       {/* ── Garis Waktu Eksplorasi (Timeline) ───────── */}
       <section className="mt-20 md:mt-32 scroll-reveal">
@@ -191,8 +243,8 @@ export function BerandaPage() {
           ].map((item, i) => (
             <div key={i} className="relative ps-8 md:ps-12 group">
               {/* Timeline Dot */}
-              <div className="absolute top-1.5 -start-2 w-4 h-4 rounded-full bg-space-dark border-2 border-white/20 group-hover:border-science transition-colors" />
-              <div className={`absolute top-2.5 -start-1 w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-reflection' : 'bg-science'} opacity-0 group-hover:opacity-100 transition-opacity`} />
+              <div className="absolute top-1.5 -inset-s-2 w-4 h-4 rounded-full bg-space-dark border-2 border-white/20 group-hover:border-science transition-colors" />
+              <div className={`absolute top-2.5 -inset-s-1 w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-reflection' : 'bg-science'} opacity-0 group-hover:opacity-100 transition-opacity`} />
               
               <div className="glass-panel p-6 rounded-2xl group-hover:bg-white/5 transition-colors">
                 <span className={`font-[Space_Grotesk,sans-serif] text-sm font-bold tracking-widest uppercase mb-2 block ${item.color}`}>
@@ -209,29 +261,58 @@ export function BerandaPage() {
           ))}
         </div>
       </section>
-      {/* ── Landasan Proyek Section ─────────────────── */}
-      <section className="mt-20 md:mt-32 scroll-reveal">
-        <GlassCard className="p-8 md:p-12 relative overflow-hidden">
-          {/* Subtle accent glow */}
-          <div className="absolute top-0 end-0 w-[40vw] h-[40vw] bg-reflection/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-          
-          <div className="relative z-10 max-w-3xl">
-            <h2 className="font-[Space_Grotesk,sans-serif] text-2xl md:text-3xl font-bold text-text-primary mb-6">
-              Mengapa Proyek Ini Penting?
+      {/* ── Pilar Pendidikan STEM (Requirement 3) ─────────────── */}
+      <section className="mt-20 md:mt-40 scroll-reveal">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
+          <div className="md:col-span-5 order-2 md:order-1">
+            <h2 className="font-[Space_Grotesk,sans-serif] text-3xl md:text-5xl font-bold text-text-primary leading-[1.1] mb-8">
+              Pilar Pendidikan <span className="text-science underline decoration-science/20 underline-offset-8">STEM</span>
             </h2>
-            <div className="space-y-4 font-[Manrope,sans-serif] text-text-muted leading-relaxed">
-              <p>
-                Penelitian R&D (Research and Development) ini dilatarbelakangi oleh kurang terintegrasinya pemahaman sains luar angkasa dengan nilai-nilai agama di sekolah berbasis Islam. Hal ini menyebabkan generasi muda sering memisahkan sains empiris dengan keyakinan spiritual mereka.
-              </p>
-              <p>
-                Di <strong>MTs Sains Algebra Kota Sorong</strong>, kami mengembangkan prototipe media pembelajaran menggunakan pendekatan <strong>STEM</strong> (Science, Technology, Engineering, Mathematics). Tujuannya adalah membekali siswa dengan keterampilan abad ke-21 melalui integrasi data eksplorasi luar angkasa (seperti NASA/ESA) dan perenungan ayat-ayat Kauniyah.
-              </p>
-              <p className="font-[Newsreader,serif] italic text-reflection/90 text-lg border-s border-reflection/30 ps-4 mt-6">
-                "Apabila terjadi perbedaan antara temuan sains dan teks agama, hal itu umumnya disebabkan oleh keterbatasan media tersaji, bukan pertentangan yang sebenarnya. Sains menjelaskan mekanisme, agama menjelaskan tujuan."
-              </p>
+            <div className="space-y-8">
+              {[
+                { title: 'Science (Sains)', desc: 'Mengkaji hukum fisika semesta—gravitasi, orbit, dan termodinamika bintang—sebagai wujud keteraturan Sunnatullah.' },
+                { title: 'Technology (Teknologi)', desc: 'Pemanfaatan AI Machine Learning dan observatorium digital untuk memproses data real-time dari NASA, ESA, dan BRIN.' },
+                { title: 'Engineering (Rekayasa)', desc: 'Memahami desain wahana antariksa, perisai panas, dan instrumen observasi sebagai solusi teknis eksplorasi manusia.' },
+                { title: 'Mathematics (Matematika)', desc: 'Kalkulasi presisi periode revolusi, konversi waktu (siang-malam), dan penghitungan jarak dalam skala Tahun Cahaya.' }
+              ].map((pilar, i) => (
+                <div key={i} className="flex gap-5 group">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-surface-high border border-white/5 flex items-center justify-center font-[Space_Grotesk,sans-serif] font-bold text-science group-hover:bg-science group-hover:text-space-dark transition-all duration-300">
+                    0{i+1}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-text-primary font-[Space_Grotesk,sans-serif] text-lg mb-1">{pilar.title}</h4>
+                    <p className="text-sm text-text-muted font-[Manrope,sans-serif] leading-relaxed max-w-md">{pilar.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </GlassCard>
+          
+          <div className="md:col-span-7 order-1 md:order-2">
+            <GlassCard className="aspect-square md:aspect-4/5 relative overflow-hidden p-0 border-0 group">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-2000 group-hover:scale-110 bg-[image:var(--bg-image)]" 
+                style={{ '--bg-image': `url('https://images.unsplash.com/photo-1614730321146-b6fa6a46bac4?w=1200&auto=format')` } as React.CSSProperties}
+              />
+              <div className="absolute inset-0 bg-linear-to-tr from-space-dark/90 via-space-dark/40 to-transparent" />
+              
+              {/* Floating Badge */}
+              <div className="absolute top-8 inset-e-8 px-4 py-2 bg-science/20 backdrop-blur-xl border border-science/30 rounded-full">
+                <span className="text-[10px] font-bold text-science uppercase tracking-widest">MTs Sains Algebra Exclusive</span>
+              </div>
+
+              <div className="absolute bottom-8 inset-s-8 inset-e-8 p-8 bg-surface-high/60 backdrop-blur-2xl rounded-3xl border border-white/10">
+                <p className="font-[Newsreader,serif] text-xl md:text-2xl text-white leading-relaxed italic mb-4">
+                  "Sains menjelaskan mekanisme, agama menjelaskan tujuan. Keduanya adalah dua sayap bagi peradaban."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-1 rounded-full bg-science" />
+                  <span className="text-xs font-[Space_Grotesk,sans-serif] text-text-dim uppercase tracking-[0.2em]">Landasan Filosofis R&D</span>
+                </div>
+              </div>
+            </GlassCard>
+          </div>
+        </div>
       </section>
 
       {/* ── AI Teaser Section ───────────────────────── */}

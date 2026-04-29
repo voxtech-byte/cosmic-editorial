@@ -3,7 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { ArabicText } from '@/shared/ui/ArabicText';
 import { PHENOMENA, getPhenomenon } from '@/entities/phenomena';
-import { ArrowLeft, ExternalLink, BookOpen, FlaskConical } from 'lucide-react';
+import { ArrowLeft, ExternalLink, BookOpen, FlaskConical, Rocket, Cpu, Calculator, Sparkles } from 'lucide-react';
 
 /** Deep-dive editorial page: Science → Religion → Context */
 export function EksplorasiPage() {
@@ -91,27 +91,70 @@ export function EksplorasiPage() {
               ))}
             </div>
 
-            {/* NASA Reference */}
-            {phenomenon.nasaRef && (
-              <a
-                href={phenomenon.nasaRef}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-6 text-sm text-science hover:text-science/80 transition-colors font-[Space_Grotesk,sans-serif]"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Sumber: NASA
-              </a>
-            )}
+            {/* Institutional Sources */}
+            <div className="flex flex-wrap gap-4 mt-8">
+              {phenomenon.sources.map((source) => (
+                <a
+                  key={source.name}
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs text-science hover:text-white transition-colors font-[Space_Grotesk,sans-serif] px-3 py-1.5 bg-science/10 border border-science/20 rounded-lg"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  Sumber: {source.name}
+                </a>
+              ))}
+            </div>
 
-            {/* STEM Insight Panel */}
-            <div className="mt-8 pt-6 border-t border-border">
-              <h3 className="font-[Space_Grotesk,sans-serif] text-sm font-bold text-text-primary uppercase tracking-widest mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-science" />
-                Pendekatan STEM
-              </h3>
-              <p className="font-[Manrope,sans-serif] text-sm text-text-dim leading-relaxed">
-                Sebagai siswa <strong>MTs Sains Algebra</strong>, fenomena ini dikaji melalui pilar Science (Hukum fisika alam), Technology (Satelit & Teleskop), Engineering (Desain wahana antariksa), dan Mathematics (Perhitungan orbit dan gravitasi).
+            {/* ── Dynamic STEM Dashboard (R&D Requirement) ── */}
+            <div className="mt-12 pt-8 border-t border-white/5">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-science/20 border border-science/30 flex items-center justify-center backdrop-blur-sm">
+                    <FlaskConical className="w-4 h-4 text-science" />
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-ai-accent/20 border border-ai-accent/30 flex items-center justify-center backdrop-blur-sm">
+                    <Cpu className="w-4 h-4 text-ai-accent" />
+                  </div>
+                </div>
+                <h3 className="font-[Space_Grotesk,sans-serif] text-sm font-bold text-text-primary uppercase tracking-[0.2em]">
+                  Laboratorium STEM
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { label: 'Science', icon: FlaskConical, val: phenomenon.stem.science, color: 'text-science', bg: 'bg-science/5' },
+                  { label: 'Technology', icon: Cpu, val: phenomenon.stem.technology, color: 'text-ai-accent', bg: 'bg-ai-accent/5' },
+                  { label: 'Engineering', icon: Rocket, val: phenomenon.stem.engineering, color: 'text-reflection', bg: 'bg-reflection/5' },
+                  { label: 'Mathematics', icon: Calculator, val: phenomenon.stem.mathematics, color: 'text-blue-400', bg: 'bg-blue-400/5' }
+                ].map((item, idx) => (
+                  <div key={idx} className={`${item.bg} p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-colors group`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <item.icon className={`w-4 h-4 ${item.color} group-hover:scale-110 transition-transform`} />
+                      <span className="font-[Space_Grotesk,sans-serif] text-[10px] uppercase tracking-widest font-bold text-text-dim">
+                        {item.label}
+                      </span>
+                    </div>
+                    <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed">
+                      {item.val}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Prinsip Tawhid (Research Requirement) ── */}
+            <div className="mt-12 p-8 rounded-3xl bg-reflection/5 border border-reflection/20 scroll-reveal">
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="w-5 h-5 text-reflection" />
+                <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-reflection">
+                  Prinsip Tawhid & Integrasi
+                </h3>
+              </div>
+              <p className="font-[Newsreader,serif] text-lg text-text-muted leading-relaxed">
+                Integrasi antara ilmu pengetahuan dan agama Islam ini berlandaskan pada <strong>Prinsip Tawhid</strong>, yang menegaskan bahwa kebenaran hakiki adalah satu kesatuan yang utuh. Antara teks suci dan data empiris tidaklah bertentangan, melainkan saling melengkapi dalam menjelaskan mekanisme (Sains) dan tujuan (Agama) dari penciptaan alam semesta.
               </p>
             </div>
           </GlassCard>
@@ -197,7 +240,7 @@ export function EksplorasiPage() {
       {/* ── Arsitektur Data R&D (Metodologi) ────────── */}
       <section className="mb-32 scroll-reveal">
         <GlassCard className="p-8 md:p-12 border-t-4 border-science overflow-hidden relative group">
-          <div className="absolute top-0 end-0 w-64 h-64 bg-science/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none group-hover:bg-science/10 transition-colors duration-1000" />
+          <div className="absolute top-0 inset-e-0 w-64 h-64 bg-science/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none group-hover:bg-science/10 transition-colors duration-1000" />
           
           <div className="max-w-4xl relative z-10">
             <h2 className="font-[Space_Grotesk,sans-serif] text-2xl md:text-3xl font-bold text-text-primary mb-6">
@@ -208,14 +251,14 @@ export function EksplorasiPage() {
                 <div className="w-10 h-10 rounded-full bg-science/20 flex items-center justify-center text-science font-bold mb-4">1</div>
                 <h4 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-text-primary">Observasi Empiris</h4>
                 <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed">
-                  Pengumpulan data mentah dari teleskop angkasa dan observatorium internasional (NASA, ESA, BRIN) mengenai anomali dan struktur kosmik terukur.
+                  Pengumpulan data mentah dari teleskop angkasa dan observatorium internasional (NASA JPL, ESA, ISS, BRIN) mengenai anomali dan struktur kosmik terukur.
                 </p>
               </div>
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-full bg-reflection/20 flex items-center justify-center text-reflection font-bold mb-4">2</div>
                 <h4 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-text-primary">Sintesis Teologis</h4>
                 <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed">
-                  Pencocokan fenomena astronomi dengan Ayat Kauniyah dalam Al-Qur'an, menggunakan tafsir yang diakui oleh Kementerian Agama RI.
+                  Pencocokan fenomena astronomi dengan Ayat Kauniyah melalui algoritma <strong>TF-IDF</strong> dan <strong>Cosine Similarity</strong> untuk menjamin akurasi rujukan tafsir Kemenag RI.
                 </p>
               </div>
               <div className="space-y-3">

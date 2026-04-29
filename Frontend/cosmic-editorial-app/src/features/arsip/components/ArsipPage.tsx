@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { ArabicText } from '@/shared/ui/ArabicText';
 import { PHENOMENA, CATEGORY_META } from '@/entities/phenomena';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink, FlaskConical } from 'lucide-react';
 
 /** Archive page — all phenomena with bento layout + horizontal scroller */
 export function ArsipPage() {
@@ -10,7 +10,7 @@ export function ArsipPage() {
     <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1400px] mx-auto w-full">
       {/* Atmospheric Glows */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute -top-[15%] -inset-s-[10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.1)_0%,transparent_70%)]" />
+        <div className="absolute top-[-15%] inset-s-[-10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.1)_0%,transparent_70%)]" />
       </div>
 
       {/* Header */}
@@ -26,62 +26,58 @@ export function ArsipPage() {
         </p>
       </header>
 
-      {/* ── Bento Grid: All Phenomena ──────────────── */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 mb-16">
+      {/* ── Phenomena Archive Grid ────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 mb-32">
         {PHENOMENA.map((phenomenon, index) => {
-          /* Asymmetric span logic: 7,5 alternating with offset */
-          const isWide = index % 2 === 0;
-          const colSpan = isWide ? 'md:col-span-7' : 'md:col-span-5';
-          const isFirst = index === 0;
-
+          // Featured archive item (first one) takes 8 columns, others take 4
+          const colSpan = index === 0 ? 'md:col-span-8' : 'md:col-span-4';
+          
           return (
             <Link
               key={phenomenon.id}
               to={`/eksplorasi?id=${phenomenon.id}`}
               className={`col-span-12 ${colSpan} group scroll-reveal`}
             >
-              <GlassCard hover className={`h-full flex flex-col ${isFirst ? 'min-h-[350px]' : ''}`}>
-                {/* Image for first/featured card */}
-                {isFirst && (
-                  <div className="h-48 -mx-6 md:-mx-8 -mt-6 md:-mt-8 mb-6 rounded-t-2xl overflow-hidden relative">
-                    <img
-                      src={phenomenon.heroImage}
-                      alt={phenomenon.title}
-                      className="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-700"
-                      width={800}
-                      height={200}
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-space-dark to-transparent" />
+              <GlassCard hover className="h-full flex flex-col p-0 overflow-hidden transition-all duration-500 hover:border-science/30">
+                {/* Card Image Banner */}
+                <div className={`${index === 0 ? 'h-64 md:h-80' : 'h-48'} w-full relative overflow-hidden`}>
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 bg-[image:var(--bg-image)]"
+                    style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-surface-high via-transparent to-transparent" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 inset-x-4 flex items-center justify-between z-10">
+                    <div className="flex items-center gap-2 px-2 py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
+                      <div className={`w-1 h-1 rounded-full ${CATEGORY_META[phenomenon.category].color}`} />
+                      <span className={`text-[9px] font-bold uppercase tracking-[0.2em] ${CATEGORY_META[phenomenon.category].color}`}>
+                        {CATEGORY_META[phenomenon.category].label}
+                      </span>
+                    </div>
                   </div>
-                )}
-
-                {/* Category */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`text-xs font-[Space_Grotesk,sans-serif] uppercase tracking-[0.2em] font-bold ${CATEGORY_META[phenomenon.category].color}`}>
-                    {CATEGORY_META[phenomenon.category].label}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-text-dim group-hover:text-science group-hover:translate-x-1 transition-all rtl:-scale-x-100" />
                 </div>
 
-                {/* Title & Description */}
-                <h3 className="font-[Space_Grotesk,sans-serif] text-xl font-bold text-text-primary mb-2 leading-tight">
-                  {phenomenon.title}
-                </h3>
-                <p className="font-[Manrope,sans-serif] text-sm text-text-muted line-clamp-3 mb-4 flex-1">
-                  {phenomenon.description}
-                </p>
+                {/* Content Area */}
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className={`font-[Space_Grotesk,sans-serif] ${index === 0 ? 'text-2xl md:text-4xl' : 'text-xl'} font-bold text-text-primary mb-3 leading-tight group-hover:text-science transition-colors`}>
+                    {phenomenon.title}
+                  </h3>
+                  
+                  <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed line-clamp-3 mb-6 flex-1">
+                    {phenomenon.description}
+                  </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {phenomenon.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 text-[10px] font-mono border border-border text-text-dim rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                    <div className="flex gap-2">
+                      {phenomenon.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="text-[9px] font-mono text-text-dim/40 uppercase">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-text-dim group-hover:text-science group-hover:translate-x-1 transition-all" />
+                  </div>
                 </div>
               </GlassCard>
             </Link>
@@ -117,31 +113,60 @@ export function ArsipPage() {
         </div>
       </section>
 
-      {/* ── Metodologi & Teknologi R&D ─────────────── */}
-      <section className="mb-16 scroll-reveal">
-        <h2 className="font-[Space_Grotesk,sans-serif] text-2xl md:text-3xl font-bold text-text-primary mb-8">
-          Metodologi & Teknologi
+      {/* ── Laporan Teknis & Metodologi R&D (Detail Paper) ── */}
+      <section className="mb-24 scroll-reveal">
+        <h2 className="font-[Space_Grotesk,sans-serif] text-2xl md:text-3xl font-bold text-text-primary mb-8 flex items-center gap-3">
+          <span className="w-10 h-px bg-science" />
+          Metodologi & Parameter Teknis
         </h2>
-        <GlassCard className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-science mb-4">
-                Research and Development (R&D)
-              </h3>
-              <p className="font-[Manrope,sans-serif] text-sm text-text-dim leading-relaxed">
-                Platform ini adalah hasil dari penelitian R&D dengan pendekatan kuantitatif. Tujuannya adalah mengembangkan prototipe media pembelajaran berbasis AI yang mampu mengaitkan sains antariksa dengan perspektif agama secara otomatis untuk MTs Sains Algebra.
+        
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Main Methodology Card */}
+          <GlassCard className="col-span-12 md:col-span-8 p-8 border-s-4 border-s-science">
+            <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-science mb-6 flex items-center gap-2">
+              <FlaskConical className="w-5 h-5" />
+              Research and Development (R&D)
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-[Manrope,sans-serif] text-sm text-text-dim leading-relaxed">
+              <div className="space-y-4">
+                <p>
+                  Prototipe ini dikembangkan menggunakan library <strong>Scikit-learn</strong> dengan implementasi algoritma <strong>TF-IDF</strong> dan <strong>Cosine Similarity</strong> untuk pemrosesan teks terintegrasi.
+                </p>
+                <p>
+                  <strong>Lingkungan Pengembangan:</strong> Sistem dibangun di atas infrastruktur komputasi <em>Vivobook Series</em> selama kurun waktu 4 bulan (Januari - April 2026).
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p>
+                  <strong>Afiliasi Internasional:</strong> Pengembangan ini selaras dengan dorongan <strong>UNESCO</strong> dan <strong>UNOOSA</strong> dalam pemanfaatan data luar angkasa (seperti dari <em>International Space Station</em>) sebagai instrumen pendidikan abad ke-21.
+                </p>
+              </div>
+            </div>
+          </GlassCard>
+
+          {/* Purposive Sampling Card */}
+          <GlassCard className="col-span-12 md:col-span-4 p-8 bg-surface-high/20 border-ai-accent/20">
+            <h3 className="font-[Space_Grotesk,sans-serif] text-sm font-bold text-ai-accent uppercase tracking-widest mb-4">
+              Status Pengujian (UAT)
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-text-muted">Metode Sampling</span>
+                <span className="text-xs font-bold text-white">Purposive Sampling</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-text-muted">Responden Terpilih</span>
+                <span className="text-xs font-bold text-white">5 Siswa (Kelas VIII)</span>
+              </div>
+              <div className="w-full h-1.5 bg-white/5 rounded-full mt-4 overflow-hidden">
+                <div className="w-full h-full bg-ai-accent" />
+              </div>
+              <p className="text-[10px] text-text-dim italic leading-relaxed">
+                *Responden dipilih berdasarkan tingkat efektivitas dan produktivitas belajar tinggi untuk validasi teknis algoritma.
               </p>
             </div>
-            <div>
-              <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-ai-accent mb-4">
-                Machine Learning & AI
-              </h3>
-              <p className="font-[Manrope,sans-serif] text-sm text-text-dim leading-relaxed">
-                Asisten virtual pada platform ini didukung oleh integrasi LLM (Large Language Model) dengan metode pemrosesan bahasa alami (NLP) yang meniru fungsi kognitif. Hal ini memungkinkan sistem menganalisis pertanyaan siswa dan merespons dengan konteks sains dan tafsir Al-Qur'an secara akurat.
-              </p>
-            </div>
-          </div>
-        </GlassCard>
+          </GlassCard>
+        </div>
       </section>
 
       {/* ── 5 Rujukan Institusi Utama ──────────────── */}
@@ -210,6 +235,8 @@ export function ArsipPage() {
           ))}
         </div>
       </section>
+
+
       {/* ── Glosarium Kosmik (Wow Factor) ─────────── */}
       <section className="mt-24 mb-12 scroll-reveal">
         <h2 className="font-[Space_Grotesk,sans-serif] text-2xl md:text-3xl font-bold text-text-primary mb-8 border-b border-white/10 pb-4">

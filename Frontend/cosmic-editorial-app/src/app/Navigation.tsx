@@ -14,8 +14,13 @@ export function Navigation() {
     <>
       {/* ── Desktop: Top Navbar ────────────────────────── */}
       <nav className="fixed top-0 inset-s-0 w-full z-50 hidden md:flex items-center justify-between px-10 py-4 bg-space-void/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
-        <div className="font-[Space_Grotesk,sans-serif] text-xl font-black tracking-widest text-text-primary uppercase">
-          Cosmic Editorial
+        <div className="flex flex-col">
+          <div className="font-[Space_Grotesk,sans-serif] text-xl font-black tracking-widest text-text-primary uppercase leading-tight">
+            Cosmic Editorial
+          </div>
+          <span className="text-[10px] text-science font-bold tracking-[0.2em] uppercase opacity-80">
+            MTs Sains Algebra R&D
+          </span>
         </div>
 
         <div className="flex items-center gap-1">
@@ -53,8 +58,11 @@ export function Navigation() {
               }`
             }
           >
-            <Icon className="w-5 h-5" />
-            <span className="text-[10px] font-medium tracking-wide">{label}</span>
+            <div className="relative">
+              <Icon className="w-5 h-5" />
+              <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-science rounded-full animate-ping opacity-0 group-[.active]:opacity-100" />
+            </div>
+            <span className="text-[10px] font-bold tracking-widest uppercase">{label}</span>
           </NavLink>
         ))}
       </nav>

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { MarkdownRenderer } from '@/shared/ui/MarkdownRenderer';
 import { streamAIResponse } from '@/shared/lib/ai-gateway';
-import { Send, Square, Bot, User, ChevronDown, Sparkles } from 'lucide-react';
+import { Send, Square, Bot, User, Sparkles, Cpu } from 'lucide-react';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -16,7 +16,7 @@ const SUGGESTION_CHIPS = [
   'Apa hubungan sains dan agama?',
 ] as const;
 
-/** AI Chat page with fixed-height scrollable conversation container */
+/** AI Chat page with Asymmetric 7:5 Editorial Layout */
 export function AsistenAIPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -77,7 +77,7 @@ export function AsistenAIPage() {
             ...prev,
             {
               role: 'assistant',
-              content: `⚠️ **Tidak dapat terhubung ke AI.**\n\n${error.message}\n\nSilakan periksa API key Anda di file \`.env.local\` atau coba provider lain.`,
+              content: `⚠️ **Tidak dapat terhubung ke AI.**\n\n${error.message}\n\nSilakan periksa API key Anda.`,
             },
           ]);
           setStreamingContent('');
@@ -110,170 +110,179 @@ export function AsistenAIPage() {
   };
 
   return (
-    <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1000px] mx-auto w-full">
-      {/* Atmospheric Glow */}
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[20%] inset-s-[30%] w-[40vw] h-[40vw] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.08)_0%,transparent_70%)]" />
-      </div>
+    <main className="pt-24 md:pt-32 pb-24 px-page max-w-[1400px] mx-auto w-full min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-start">
+        
+        {/* ── Chat Section (7 Columns) ────────────────── */}
+        <section className="md:col-span-7 flex flex-col h-[calc(100vh-200px)]">
+          <div className="mb-8 scroll-reveal">
+            <h1 className="font-[Space_Grotesk,sans-serif] text-3xl md:text-5xl font-bold text-text-primary tracking-tighter leading-none mb-4">
+              Asisten <span className="text-ai-accent">Falak</span>
+            </h1>
+            <p className="font-[Manrope,sans-serif] text-sm text-text-muted">
+              Sintesis kecerdasan buatan terintegrasi kurikulum MTs Sains Algebra.
+            </p>
+          </div>
 
-      {/* Header */}
-      <header className="mb-6 md:mb-8">
-        <h1 className="font-[Space_Grotesk,sans-serif] text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-tight text-text-primary">
-          Asisten AI
-        </h1>
-        <p className="font-[Manrope,sans-serif] text-sm text-text-muted mt-1">
-          Tanyakan tentang fenomena antariksa & integrasinya dengan nilai Islam
-        </p>
-      </header>
+          <GlassCard className="flex-1 flex flex-col p-0 overflow-hidden border-ai-accent/10 shadow-[0_0_50px_-12px_rgba(var(--ai-accent-rgb),0.1)]">
+            {/* Conversation Area */}
+            <div 
+              ref={scrollRef}
+              className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide"
+            >
+              {messages.length === 0 && !isStreaming && (
+                <div className="h-full flex flex-col items-center justify-center text-center p-8">
+                  <div className="w-16 h-16 rounded-3xl bg-ai-accent/10 flex items-center justify-center mb-6 animate-pulse">
+                    <Sparkles className="w-8 h-8 text-ai-accent" />
+                  </div>
+                  <h3 className="font-[Space_Grotesk,sans-serif] text-xl font-bold text-text-primary mb-2">
+                    Siap Memulai Penyelidikan?
+                  </h3>
+                  <p className="font-[Manrope,sans-serif] text-sm text-text-muted max-w-xs leading-relaxed">
+                    Ajukan pertanyaan seputar keterkaitan ayat Al-Qur'an dengan data sains antariksa terbaru.
+                  </p>
+                </div>
+              )}
 
-      {/* ── Chat Container (FIXED HEIGHT, SCROLLABLE) ── */}
-      <GlassCard className="p-0 flex flex-col h-[60vh] md:h-[65vh]">
-        {/* Message Area — scrollable */}
-        <div
-          ref={scrollRef}
-          className="flex-1 overflow-y-auto chat-scroll p-4 md:p-6 space-y-4"
-        >
-          {/* Empty State */}
-          {messages.length === 0 && !streamingContent && (
-            <div className="flex flex-col items-center justify-center h-full text-center py-8">
-              <div className="w-16 h-16 rounded-2xl bg-science/10 flex items-center justify-center mb-4">
-                <Sparkles className="w-8 h-8 text-science" />
+              {messages.map((msg, i) => (
+                <div 
+                  key={i} 
+                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
+                >
+                  <div className={`flex gap-4 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                      msg.role === 'user' ? 'bg-science/20 text-science' : 'bg-ai-accent/20 text-ai-accent'
+                    }`}>
+                      {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                    </div>
+                    <div className={`p-4 rounded-2xl ${
+                      msg.role === 'user' 
+                        ? 'bg-surface-high border border-white/5 text-text-primary' 
+                        : 'bg-space-void/40 border border-ai-accent/10 text-text-muted shadow-inner'
+                    }`}>
+                      <MarkdownRenderer content={msg.content} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {isStreaming && streamingContent && (
+                <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2">
+                  <div className="flex gap-4 max-w-[85%]">
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-ai-accent/20 text-ai-accent flex items-center justify-center animate-pulse">
+                      <Bot className="w-4 h-4" />
+                    </div>
+                    <div className="p-4 rounded-2xl bg-space-void/40 border border-ai-accent/10 text-text-muted">
+                      <MarkdownRenderer content={streamingContent} />
+                      <span className="inline-block w-1.5 h-4 bg-ai-accent ml-1 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Input Area */}
+            <div className="p-4 bg-surface-high/50 border-t border-white/5">
+              <div className="flex gap-4">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Tanyakan sesuatu..."
+                  className="flex-1 bg-space-void/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-ai-accent/50 transition-colors"
+                />
+                {isStreaming ? (
+                  <button
+                    onClick={handleStop}
+                    aria-label="Hentikan generasi"
+                    className="p-3 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                  >
+                    <Square className="w-5 h-5 fill-current" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleSend()}
+                    disabled={!input.trim()}
+                    aria-label="Kirim pertanyaan"
+                    className="p-3 rounded-xl bg-ai-accent text-space-dark hover:brightness-110 disabled:opacity-50 transition-all"
+                  >
+                    <Send className="w-5 h-5" />
+                  </button>
+                )}
               </div>
-              <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-text-primary mb-2">
-                Falak — Asisten Sains & Agama
-              </h3>
-              <p className="font-[Manrope,sans-serif] text-sm text-text-muted max-w-md mb-6">
-                Halo! Saya Falak, asisten cerdas untuk siswa Kelas VIII <strong>MTs Sains Algebra</strong>. Mari eksplorasi antariksa menggunakan pendekatan STEM dan Ayat Kauniyah.
-              </p>
-
+              
               {/* Suggestion Chips */}
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex flex-wrap gap-2 mt-4">
                 {SUGGESTION_CHIPS.map((chip) => (
                   <button
                     key={chip}
                     onClick={() => handleSend(chip)}
-                    className="px-4 py-2 text-xs font-[Manrope,sans-serif] text-text-muted border border-border rounded-full hover:border-science/30 hover:text-science transition-all"
+                    disabled={isStreaming}
+                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-[10px] text-text-muted hover:bg-white/10 hover:text-text-primary transition-all"
                   >
                     {chip}
                   </button>
                 ))}
               </div>
             </div>
-          )}
+          </GlassCard>
+        </section>
 
-          {/* Messages */}
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              {msg.role === 'assistant' && (
-                <div className="w-8 h-8 rounded-xl bg-science/10 flex items-center justify-center shrink-0 mt-1">
-                  <Bot className="w-4 h-4 text-science" />
+        {/* ── Research Panel (5 Columns) ──────────────── */}
+        <aside className="md:col-span-5 space-y-6 scroll-reveal md:mt-24">
+          <GlassCard className="p-8 border-s-4 border-s-ai-accent">
+            <h3 className="font-[Space_Grotesk,sans-serif] text-lg font-bold text-text-primary mb-6 flex items-center gap-2">
+              <Cpu className="w-5 h-5 text-ai-accent" />
+              Metodologi R&D
+            </h3>
+            
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-1 h-12 bg-ai-accent/20 rounded-full" />
+                <div>
+                  <h4 className="text-xs font-bold text-text-dim uppercase tracking-widest mb-1">Infrastruktur Komputasi</h4>
+                  <p className="text-sm text-text-primary font-mono">Asus Vivobook (Prototype Environment)</p>
                 </div>
-              )}
-
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                  msg.role === 'user'
-                    ? 'bg-science/15 text-text-primary rounded-ee-sm'
-                    : 'bg-surface-high/50 rounded-es-sm'
-                }`}
-              >
-                {msg.role === 'assistant' ? (
-                  <MarkdownRenderer content={msg.content} />
-                ) : (
-                  <p className="text-sm">{msg.content}</p>
-                )}
               </div>
 
-              {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-xl bg-reflection/10 flex items-center justify-center shrink-0 mt-1">
-                  <User className="w-4 h-4 text-reflection" />
+              <div className="flex items-start gap-4">
+                <div className="w-1 h-12 bg-science/20 rounded-full" />
+                <div>
+                  <h4 className="text-xs font-bold text-text-dim uppercase tracking-widest mb-1">Algoritma Pemrosesan</h4>
+                  <p className="text-sm text-text-primary">TF-IDF & Cosine Similarity Synthesis</p>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
 
-          {/* Streaming Bubble */}
-          {isStreaming && streamingContent && (
-            <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-xl bg-science/10 flex items-center justify-center shrink-0 mt-1">
-                <Bot className="w-4 h-4 text-science animate-pulse-glow" />
-              </div>
-              <div className="max-w-[80%] rounded-2xl rounded-es-sm px-4 py-3 bg-surface-high/50">
-                <MarkdownRenderer content={streamingContent} />
-              </div>
-            </div>
-          )}
-
-          {/* Thinking Skeleton */}
-          {isStreaming && !streamingContent && (
-            <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-xl bg-science/10 flex items-center justify-center shrink-0 mt-1">
-                <Bot className="w-4 h-4 text-science animate-pulse-glow" />
-              </div>
-              <div className="rounded-2xl rounded-es-sm px-4 py-3 bg-surface-high/50">
-                <div className="flex items-center gap-2 text-sm text-text-dim">
-                  <span className="inline-block w-2 h-2 rounded-full bg-science animate-bounce [animation-delay:0ms]" />
-                  <span className="inline-block w-2 h-2 rounded-full bg-science animate-bounce [animation-delay:150ms]" />
-                  <span className="inline-block w-2 h-2 rounded-full bg-science animate-bounce [animation-delay:300ms]" />
-                  <span className="ms-2 text-xs font-[Space_Grotesk,sans-serif]">
-                    Falak sedang meramu jawaban...
-                  </span>
+              <div className="pt-6 border-t border-white/5">
+                <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold text-text-muted mb-2">
+                  <span>AI Latency & Reliability</span>
+                  <span>98%</span>
+                </div>
+                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                  <div className="w-[98%] h-full bg-ai-accent shadow-[0_0_15px_rgba(var(--ai-accent-rgb),0.4)]" />
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </GlassCard>
 
-        {/* Scroll-to-bottom button */}
-        {messages.length > 3 && (
-          <button
-            onClick={scrollToBottom}
-            title="Scroll ke bawah"
-            aria-label="Scroll ke bawah"
-            className="absolute bottom-20 inset-s-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-surface-high border border-border flex items-center justify-center hover:bg-surface-bright transition-colors"
-          >
-            <ChevronDown className="w-4 h-4 text-text-dim" />
-          </button>
-        )}
+          <GlassCard className="p-8 bg-science/5 border-science/10 relative overflow-hidden group">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-science/10 rounded-full blur-3xl group-hover:bg-science/20 transition-colors" />
+            <h3 className="font-[Space_Grotesk,sans-serif] text-sm font-bold text-science uppercase tracking-widest mb-4">
+              Pilar Integratif STEM
+            </h3>
+            <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed italic mb-6">
+              "Asisten Falak dirancang untuk menjembatani observasi empiris lembaga antariksa (NASA/ESA) dengan kedalaman makna spiritual Ayat Kauniyah."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-bold text-text-dim">MTs Sains Algebra</div>
+              <div className="w-1.5 h-1.5 rounded-full bg-science animate-pulse" />
+            </div>
+          </GlassCard>
+        </aside>
 
-        {/* ── Input Bar ─────────────────────────────── */}
-        <div className="border-t border-white/5 p-3 md:p-4">
-          <div className="flex items-center gap-2 bg-surface/60 rounded-xl border border-border focus-within:border-science/50 transition-colors">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Tanyakan tentang fenomena antariksa..."
-              disabled={isStreaming}
-              className="flex-1 bg-transparent px-4 py-3.5 text-sm text-text-primary placeholder:text-text-dim/50 outline-none disabled:opacity-50"
-            />
-
-            {isStreaming ? (
-              <button
-                onClick={handleStop}
-                className="me-2 w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center hover:bg-red-500/30 transition-colors"
-                aria-label="Hentikan generasi"
-              >
-                <Square className="w-4 h-4" />
-              </button>
-            ) : (
-              <button
-                onClick={() => handleSend()}
-                disabled={!input.trim()}
-                className="me-2 w-10 h-10 rounded-xl bg-science text-space-dark flex items-center justify-center hover:brightness-110 active:translate-y-0.5 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Kirim pesan"
-              >
-                <Send className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-        </div>
-      </GlassCard>
+      </div>
     </main>
   );
 }
