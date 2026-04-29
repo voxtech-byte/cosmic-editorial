@@ -1,0 +1,702 @@
+# 🎯 UNIVERSAL WEB EDITORIAL & INTERACTIVE MASTER SPEC
+**Agency-Grade Design | Anti-Monotony Protocol | Zero-Hallucination Mode | v4.0 (Web-First • Editorial • Immersive • Universal)**
+
+> 📌 **Status:** Dokumen FINAL untuk pembuatan website profesional kelas dunia.  
+> **Single Source of Truth.** Semua versi sebelumnya → **DEPRECATED**.  
+> **Objective:** Menghancurkan "AI Monotony" (generic, simetris, membosankan) dan menggantinya dengan pengalaman web editorial high-end yang terasa *crafted*, bukan *generated*.
+
+---
+
+## 0. 🧭 THE "ANTI-MONOTONY" MANIFESTO
+
+> **`Symmetry is safe. Asymmetry is intentional. Monotony is the enemy.`**
+
+### AI Default Habit (❌ BLOCKED):
+```
+❌ flex-col untuk seluruh halaman
+❌ grid-cols-1/2/3 dengan equal width
+❌ Centered headers dengan margin auto
+❌ Pure white/black backgrounds tanpa depth
+❌ Static vertical scroll tanpa spatial rhythm
+❌ Standard navbar + hero + cards + footer template
+```
+
+### Professional Editorial Standard (✅ REQUIRED):
+```
+✅ Off-grid typography dengan overlapping & negative space
+✅ Asymmetric Bento Grids dengan variable spans & contextual hierarchy
+✅ Parallax, sticky-sections, horizontal reveals untuk storytelling
+✅ Subtle gradients, noise textures, layering untuk depth perception
+✅ Typographic-first heros dengan visual weight, bukan hanya "title + subtitle"
+✅ Scroll-driven animations dengan view-timeline & CSS containment
+```
+
+### Quality Definition (Universal Web)
+| ✅ Harus Ada | 🚫 Tidak Perlu Day-1 |
+|-------------|---------------------|
+| Layout intentionally asymmetric di ≥2 section | 100% pixel-perfect tanpa user testing |
+| Typography sebagai structural element (bukan hanya text) | Animasi kompleks di setiap interaksi |
+| Core Web Vitals 2025 pass (LCP, CLS, INP) | Admin panel / analytics dashboard |
+| Mobile rearrangement (bukan hanya stacking) | Real-time features tanpa justifikasi |
+| Accessibility baked-in (WCAG 2.2 AA) | Over-engineered state management |
+
+---
+
+## 1. 🚨 ANTI-HALLUCINATION & SCOPE PROTOCOL (WEB-SPECIFIC)
+
+### 🔒 Scope Lock & Boundary Lock (WAJIB sebelum coding)
+```markdown
+🔒 WILL BUILD:
+- [Layout Pattern A] – business/UX reason (1 kalimat)
+- [Component B] – purpose & target screen (1 kalimat)  
+- [Interaction C] – user value (1 kalimat)
+
+🚫 WON'T BUILD:
+- [Pattern X] – scope creep / Tier 3+ / kompleksitas belum perlu
+- [Library Y] – premature abstraction / bloat risk
+
+📏 SIZE ESTIMATION:
+- Layout A: ~XXX lines | Component B: ~XXX lines | Total artifact: <1000 lines
+```
+
+### 📏 Size Police (Web-Adjusted)
+| Artifact | Hard Limit | Soft Buffer | Action if Exceeded |
+|----------|-----------|-------------|-------------------|
+| Page Component | 500 lines | 550 | Extract sections to feature components |
+| Layout Pattern | 300 lines | 330 | Extract to `shared/layouts/` |
+| Custom Hook | 250 lines | 280 | Extract focused hooks |
+| CSS/Tailwind String | 40 classes | - | Extract to `@layer`, `cva`, atau CSS vars |
+| Single Output Artifact | 1000 lines | - | Chunk into route segments / lazy load |
+
+### 🔍 Logic Police (Web Context)
+1. **Is this interaction strictly required?** (Uncertain → ❌ omit)
+2. **>3 conditional layout branches?** → Extract to layout component atau custom hook
+3. **Scroll/viewport dependent?** → Use `IntersectionObserver` / CSS `view-timeline`, bukan JS scroll listener
+4. **SEO-critical content?** → Ensure server-rendered, not client-hydrated only
+
+### 🛡️ Dependency Policy (Web Whitelist)
+| Status | Libraries | Notes |
+|--------|-----------|-------|
+| ✅ Core (Wajib) | React 18+/Next.js 14+, Tailwind v3/v4, TypeScript strict | Baseline stack |
+| ✅ Recommended | `clsx`/`tailwind-merge`, `framer-motion` (scroll animations ONLY), `@react-spring/web` (parallax), `lenis` (smooth scroll) | Use sparingly, justify each |
+| ⚠️ Conditional | `three.js`/`@react-three/fiber` (3D ONLY if critical), `gsap` (complex timelines), `embla-carousel` (horizontal scroll) | Must have business justification |
+| 🚫 Banned | `bootstrap`, `jquery`, `slick-carousel`, `owl.carousel`, inline `style={{}}` (kecuali dynamic `transform/opacity`), `lodash` | Bloat / anti-pattern |
+
+### 👃 Web Code Smell Detector
+```
+❌ // TODO: add animation later → HALLUCINATION. Implement or delete.
+❌ className="flex flex-col items-center justify-center min-h-screen" → MONOTONY. Break the grid.
+❌ All cards same height/width → LAZY DESIGN. Use variable spans.
+❌ Hardcoded breakpoints (sm:, md:) tanpa container queries → NOT RESPONSIVE.
+❌ Scroll listener tanpa throttle/debounce → PERFORMANCE KILLER.
+❌ Image tanpa width/height/aspect-ratio → CLS RISK.
+❌ Text hardcoded di JSX tanpa i18n key → NOT UNIVERSAL.
+❌ Z-index magic numbers (999, 9999) → LAYERING CHAOS. Use CSS layers.
+❌ Animation tanpa prefers-reduced-motion → A11y VIOLATION.
+❌ Console.log di production build → CLEANUP BEFORE SHIPPING.
+```
+
+---
+
+## 2. 🏗️ EDITORIAL LAYOUT SYSTEMS (BEYOND FLEX-COL)
+
+### A. The "Broken Grid" Strategy
+```jsx
+// ✅ Asymmetric Grid with Intentional Imbalance
+<div className="grid grid-cols-12 gap-6 md:gap-8 lg:gap-12">
+  {/* Anchor Element - breaks pattern */}
+  <article className="col-span-12 md:col-span-8 lg:col-span-7 row-span-2 
+    bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 md:p-12 
+    shadow-[0_8px_40px_rgb(0,0,0,0.04)] relative overflow-hidden">
+    <span className="absolute -top-8 -end-8 w-32 h-32 bg-emerald-100 rounded-full blur-3xl opacity-60" />
+    <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.9] relative z-10">
+      Editorial<br/><span className="text-emerald-600">Headline</span>
+    </h2>
+  </article>
+  
+  {/* Supporting Elements - variable spans */}
+  <aside className="col-span-12 md:col-span-4 lg:col-span-5 space-y-6">
+    <div className="bg-white rounded-2xl p-6 border border-slate-100">
+      <p className="text-sm uppercase tracking-[0.2em] text-emerald-600 font-bold mb-2">Insight</p>
+      <p className="text-slate-700">Supporting content that complements the anchor.</p>
+    </div>
+    <div className="bg-slate-900 text-white rounded-2xl p-6">
+      <p className="text-2xl font-bold">42%</p>
+      <p className="text-sm text-slate-300">Engagement increase</p>
+    </div>
+  </aside>
+</div>
+```
+
+### B. Bento Grid 2.0 (Contextual Spans + Dynamic Rearrangement)
+```jsx
+// ✅ Premium Bento Grid with Responsive Rearrangement
+<div className="grid grid-cols-12 grid-rows-[auto_auto] md:grid-rows-6 gap-4 md:gap-6 lg:gap-8">
+  {/* Featured - spans multiple rows/cols, rearranges on mobile */}
+  <section className="col-span-12 md:col-span-8 md:row-span-4 
+    bg-white rounded-3xl border border-slate-100 p-6 md:p-8 
+    shadow-[0_4px_20px_rgb(0,0,0,0.04)] order-1 md:order-none">
+    <h3 className="text-2xl md:text-3xl font-bold mb-4">Featured Story</h3>
+    {/* Content */}
+  </section>
+  
+  {/* Quick Stats - compact, high-contrast */}
+  <section className="col-span-6 md:col-span-4 md:row-span-2 
+    bg-emerald-500 text-white rounded-2xl p-6 
+    flex items-center justify-center order-3 md:order-none">
+    <div className="text-center">
+      <p className="text-4xl font-black">12K</p>
+      <p className="text-sm opacity-90">Users</p>
+    </div>
+  </section>
+  
+  {/* Visual Asset - image-heavy, aspect-ratio locked */}
+  <section className="col-span-6 md:col-span-4 md:row-span-4 
+    bg-slate-900 rounded-2xl overflow-hidden order-2 md:order-none">
+    <img src="/visual.jpg" alt="Visual" 
+      className="w-full h-full object-cover aspect-[4/5] md:aspect-square" />
+  </section>
+  
+  {/* Secondary Info - text-heavy, minimal */}
+  <section className="col-span-12 md:col-span-8 md:row-span-2 
+    bg-slate-50 rounded-2xl p-6 border border-slate-100 order-4">
+    <p className="text-slate-700 leading-relaxed">Secondary content that supports the main narrative.</p>
+  </section>
+</div>
+```
+
+### C. Advanced Layout Primitives Dictionary
+| Pattern | CSS/Tailwind Strategy | Use Case | Example Class |
+|---------|----------------------|----------|--------------|
+| **Sticky Stacking** | `sticky top-0 z-30` + `-[margin]` for overlap | Scroll-aware sections, layered storytelling | `className="sticky top-0 z-30 -mt-12"` |
+| **Horizontal Scroll Section** | `flex overflow-x-auto snap-x snap-mandatory` + `snap-center` | Galleries, testimonials, feature highlights | `className="flex overflow-x-auto snap-x pb-8"` |
+| **Parallax Reveal** | `will-change-transform` + `data-scroll-speed` (Lenis) | Hero images, background layers | `className="will-change-transform" data-scroll-speed="0.5"` |
+| **Container Query Layout** | `@container` + `@[300px]:grid-cols-2` | Component-level responsiveness | `className="@container"` + child `@[400px]:flex-row` |
+| **CSS Subgrid Alignment** | `grid-template-columns: subgrid` | Nested grids that align to parent | `className="grid grid-cols-subgrid col-span-6"` |
+| **View-Triggered Animation** | `animation-timeline: view()` + `animation-range` | Scroll-driven reveals, progress indicators | `className="animate-[fadeInUp_0.6s_ease] [animation-timeline:view()]"` |
+
+### D. Responsive Rearrangement Rules (NOT Just Stacking)
+```
+📱 Mobile (<768px):
+- Horizontal scrollers for card lists (reduce vertical height)
+- Typography scales via clamp(), not breakpoints
+- Touch targets minimum h-14 (56px)
+- Navigation transforms to bottom sheet or floating dock
+
+🖥️ Desktop (>1024px):
+- Asymmetric grids with intentional white space
+- Hover states for interactive elements
+- Multi-column text with drop caps for editorial content
+- Parallax/scroll effects enabled (with reduced-motion respect)
+
+🔄 Rearrangement Logic:
+- Use CSS `order` + `grid-template-areas` for visual reordering
+- Keep DOM order logical for accessibility/SEO
+- Test keyboard navigation after rearrangement
+```
+
+---
+
+## 3. 🔤 TYPOGRAPHY AS STRUCTURAL ELEMENT
+
+### A. Kinetic Typography System
+```css
+/* Fluid scaling with clamp() - no hardcoded breakpoints */
+:root {
+  --text-display: clamp(3rem, 8vw + 1rem, 8rem);
+  --text-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --text-h2: clamp(1.75rem, 3vw + 1rem, 3rem);
+  --text-body: clamp(1rem, 0.25vw + 0.9rem, 1.125rem);
+  --text-caption: clamp(0.875rem, 0.1vw + 0.8rem, 1rem);
+  
+  /* Line height scales with size */
+  --lh-display: 0.9;
+  --lh-h1: 1.0;
+  --lh-h2: 1.1;
+  --lh-body: 1.6;
+  --lh-caption: 1.4;
+}
+```
+
+### B. Typographic Patterns (Editorial Grade)
+| Element | Style Principle | Tailwind Strategy | Example |
+|---------|----------------|-------------------|---------|
+| **Hero Title** | Ultra-bold, tight tracking, overlapping | `text-[var(--text-display)] font-black tracking-tighter leading-[var(--lh-display)] [text-wrap:balance]` | `<h1 className="...">Crafted<br/><span className="text-emerald-600 -ms-2">Experiences</span></h1>` |
+| **Eyebrow/Label** | All-caps, wide tracking, accent color | `text-xs uppercase tracking-[0.3em] text-emerald-600 font-bold mb-4 block` | `<span className="...">Featured Story</span>` |
+| **Pull Quote** | Italic, large, serif, border accent | `text-2xl md:text-3xl italic font-serif text-slate-700 border-s-4 border-emerald-500 ps-6 py-2 my-8` | `<blockquote className="...">"Design is intelligence made visible."</blockquote>` |
+| **Drop Cap** | First letter enlarged, floated | `first-letter:text-7xl first-letter:font-black first-letter:float-start first-letter:me-3 first-letter:leading-[0.8]` | `<p className="...">Lorem ipsum...</p>` |
+| **Vertical Text** | Artistic headers, CJK support | `writing-mode-vertical-rl text-orientation-mixed rotate-180` | `<span className="...">EDITORIAL</span>` |
+
+### C. Font Stack (Universal, Performance-Optimized)
+```css
+/* Preload critical fonts in <head> */
+<link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/source-serif-pro-var.woff2" as="font" type="font/woff2" crossorigin />
+
+/* Font families with fallbacks */
+:root {
+  --font-sans: 'Inter Variable', 'SF Pro Display', -apple-system, system-ui, sans-serif;
+  --font-serif: 'Source Serif Pro Variable', 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  
+  /* Script-specific fallbacks */
+  --font-arabic: 'Readex Pro', 'Cairo', 'Noto Sans Arabic', sans-serif;
+  --font-cjk: 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+}
+
+/* Font loading strategy */
+@font-face {
+  font-family: 'Inter Variable';
+  src: url('/fonts/inter-var.woff2') format('woff2');
+  font-display: swap; /* Critical: prevent FOIT */
+  font-weight: 100 900;
+  font-style: normal;
+}
+```
+
+---
+
+## 4. 🌊 IMMERSIVE INTERACTIONS & SPATIAL DEPTH
+
+### A. Layering System (Z-Index via CSS Layers, Not Magic Numbers)
+```css
+@layer base, components, utilities, editorial;
+
+@layer editorial {
+  /* Define semantic z-index via CSS custom properties */
+  :root {
+    --z-background: 0;
+    --z-surface: 10;
+    --z-floating: 20;
+    --z-overlay: 30;
+    --z-modal: 40;
+    --z-toast: 50;
+  }
+  
+  .layer-bg { z-index: var(--z-background); }
+  .layer-surface { z-index: var(--z-surface); }
+  .layer-floating { z-index: var(--z-floating); }
+  .layer-overlay { z-index: var(--z-overlay); }
+}
+```
+
+### B. Glassmorphism & Depth Tokens
+```jsx
+// ✅ Premium Glass Card
+<div className="
+  relative rounded-3xl p-8
+  bg-white/70 backdrop-blur-xl
+  border border-white/20 shadow-[0_8px_32px_rgb(0,0,0,0.08)]
+  before:absolute before:inset-0 before:rounded-3xl 
+  before:bg-gradient-to-br before:from-white/40 before:to-transparent
+  hover:shadow-[0_12px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1
+  transition-all duration-300
+">
+  <div className="relative z-10">Content here</div>
+</div>
+```
+
+### C. Scroll-Driven Storytelling (CSS View Timeline)
+```css
+/* Scroll-triggered animations without JS */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.scroll-reveal {
+  animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-timeline: view();
+  animation-range: entry 10% cover 30%;
+}
+
+/* Progress indicator tied to scroll */
+.progress-bar {
+  position: sticky;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(to right, emerald-500 0%, transparent 100%);
+  animation: progressFill linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0 100%;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+```
+
+### D. Horizontal Scroll Sections (Break Vertical Monotony)
+```jsx
+// ✅ Horizontal Scroller with Snap Points
+<section className="py-16 md:py-24">
+  <div className="max-w-7xl mx-auto px-4 mb-8">
+    <h2 className="text-3xl md:text-4xl font-bold">Featured Work</h2>
+  </div>
+  
+  <div className="flex overflow-x-auto snap-x snap-mandatory pb-8 px-4 md:px-0 gap-6 md:gap-8 scrollbar-hide">
+    {[1,2,3,4].map((item) => (
+      <article key={item} className="
+        snap-center shrink-0 w-[85vw] md:w-[600px] 
+        bg-white rounded-3xl border border-slate-100 p-6 md:p-8
+        shadow-[0_4px_20px_rgb(0,0,0,0.04)]
+      ">
+        {/* Card content */}
+      </article>
+    ))}
+  </div>
+  
+  {/* Scroll indicator for desktop */}
+  <div className="hidden md:flex items-center gap-2 mt-4 ps-4 text-sm text-slate-500">
+    <span>Scroll</span>
+    <ArrowRight className="w-4 h-4 animate-pulse" />
+  </div>
+</section>
+```
+
+---
+
+## 5. 🎨 SEMANTIC DESIGN SYSTEM (EDITORIAL GRADE)
+
+### A. Color Tokens (OKLCH for Perceptual Uniformity + Depth)
+```css
+:root {
+  /* Core neutrals with depth variants */
+  --color-surface: oklch(0.98 0.01 250);
+  --color-surface-elevated: oklch(1 0 0);
+  --color-surface-deep: oklch(0.95 0.01 250);
+  --color-border: oklch(0.85 0.02 260);
+  --color-border-strong: oklch(0.7 0.02 260);
+  --color-text: oklch(0.15 0.02 260);
+  --color-text-muted: oklch(0.5 0.02 260);
+  
+  /* Semantic actions */
+  --color-primary: oklch(0.65 0.2 150);
+  --color-primary-hover: oklch(0.6 0.2 150);
+  --color-success: oklch(0.6 0.18 145);
+  --color-warning: oklch(0.75 0.18 85);
+  --color-error: oklch(0.55 0.25 25);
+  
+  /* Editorial accents */
+  --color-accent-1: oklch(0.7 0.15 240); /* Indigo */
+  --color-accent-2: oklch(0.75 0.18 35); /* Amber */
+  
+  /* Background textures */
+  --bg-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    --color-surface: oklch(0.15 0.02 260);
+    --color-surface-elevated: oklch(0.2 0.02 260);
+    --color-border: oklch(0.3 0.02 260);
+    --color-text: oklch(0.98 0.01 250);
+  }
+}
+```
+
+### B. Component Patterns (Non-Monotonous)
+| Component | Strategy | Tailwind Example |
+|-----------|----------|------------------|
+| **Editorial Card** | Asymmetric, layered, contextual elevation | `rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface-elevated)] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--color-primary)]/5 before:to-transparent` |
+| **Floating CTA** | Glassmorphism, fixed position, subtle animation | `fixed bottom-6 end-6 z-floating bg-[var(--color-surface-elevated)]/90 backdrop-blur-xl rounded-full px-6 py-3 shadow-[0_4px_20px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300` |
+| **Fat Footer** | Multi-column, massive CTA, site-map grid | `bg-[var(--color-surface-deep)] rounded-t-3xl p-8 md:p-16 mt-24 border-t border-[var(--color-border)]` + internal `grid grid-cols-1 md:grid-cols-4 gap-8` |
+| **Hero Section** | Overlapping text, negative space, depth layers | `relative min-h-[80vh] flex items-center before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_top,_var(--color-primary)/10%,_transparent_70%)]` |
+
+### C. Micro-Interactions (Contextual, Not Bloat)
+```css
+/* Respect reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  /* Hover lift with subtle shadow shift */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgb(0,0,0,0.12);
+  }
+  
+  /* Button press feedback */
+  .btn-press:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgb(0,0,0,0.08) !important;
+  }
+  
+  /* Text reveal on hover */
+  .text-reveal {
+    position: relative;
+    overflow: hidden;
+  }
+  .text-reveal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, var(--color-primary)/10%, transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .text-reveal:hover::after {
+    transform: translateX(100%);
+  }
+}
+```
+
+---
+
+## 6. 🗄️ STATE, DATA & SEO ARCHITECTURE
+
+### A. State Strategy (Web-Optimized)
+| State Type | Tool | Scope | Example |
+|------------|------|-------|---------|
+| UI/Local | `useState`/`useReducer` | Modal, toggle, form input | `const [isMenuOpen, setIsMenuOpen] = useState(false)` |
+| URL-Based | `useSearchParams` (React Router) / `next/navigation` | Filters, tabs, pagination, shareable states | `const [searchParams, setSearchParams] = useSearchParams()` |
+| Server | `TanStack Query` / Next.js `fetch` + `revalidate` | API data, CMS content, caching | `useQuery({ queryKey: ['posts'], queryFn: fetchPosts })` |
+| Global | `Zustand` (slices) ONLY if truly cross-feature | Theme, language, auth | `useSettingsStore((s) => s.theme)` |
+
+### B. SEO & Performance Critical Patterns
+```jsx
+// ✅ Image Optimization (Prevent CLS)
+<picture>
+  <source srcSet="/image.avif" type="image/avif" />
+  <source srcSet="/image.webp" type="image/webp" />
+  <img 
+    src="/image.jpg" 
+    alt="Descriptive alt text"
+    width="1200" 
+    height="800"
+    className="w-full h-auto rounded-2xl object-cover"
+    loading="lazy"
+    decoding="async"
+  />
+</picture>
+
+// ✅ Font Preloading (Prevent FOIT)
+<link 
+  rel="preload" 
+  href="/fonts/inter-var.woff2" 
+  as="font" 
+  type="font/woff2" 
+  crossOrigin="anonymous" 
+/>
+
+// ✅ Structured Data (JSON-LD)
+<script 
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Editorial Title",
+    "author": { "@type": "Person", "name": "Author Name" }
+  })}} 
+/>
+```
+
+### C. Error Boundaries per Editorial Section
+```jsx
+// Wrap each major section to prevent cascade failures
+<ErrorBoundary fallback={<SectionError onRetry={reset} />}>
+  <HeroSection />
+</ErrorBoundary>
+
+<ErrorBoundary fallback={<SectionError onRetry={reset} />}>
+  <BentoGridSection />
+</ErrorBoundary>
+
+function SectionError({ onRetry }) {
+  return (
+    <div className="bg-rose-50 border border-rose-200 rounded-2xl p-8 text-center">
+      <p className="text-rose-900 font-semibold mb-2">Content unavailable</p>
+      <button onClick={onRetry} className="text-rose-600 hover:text-rose-700 font-medium">
+        Try again
+      </button>
+    </div>
+  );
+}
+```
+
+---
+
+## 7. ⚡ PERFORMANCE, ACCESSIBILITY & DEVOPS
+
+### A. Core Web Vitals 2025 Targets
+| Metric | Target | Fix Strategy |
+|--------|--------|--------------|
+| LCP | `< 2.0s` | Preload hero image, inline critical CSS, defer non-critical JS |
+| CLS | `< 0.05` | Reserve space for images/media, font `swap` + size lock, avoid dynamic injection above content |
+| INP | `< 200ms` | Debounce inputs, use CSS transitions over JS, web workers for heavy calc |
+| TBT | `< 200ms` | Code split routes, lazy load below-fold content, minimize main thread work |
+
+### B. Accessibility (WCAG 2.2 AA + Editorial Enhancements)
+```
+✅ Focus-visible:ring-4 on all interactive elements (keyboard nav)
+✅ aria-label for icon-only buttons, decorative images have alt=""
+✅ Skip link: <a href="#main" class="sr-only focus:not-sr-only fixed top-4 start-4 z-50 bg-emerald-600 text-white px-4 py-2 rounded-lg">Skip to content</a>
+✅ Color contrast ≥ 4.5:1 (text), ≥ 3:1 (large text/UI)
+✅ Reduced motion: @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+✅ Text resizing: Layout does not break at 200% zoom
+✅ Semantic HTML: <article>, <section>, <nav>, <main>, <aside> for structure
+✅ ARIA live regions: For dynamic updates (form success, cart changes)
+```
+
+### C. DevOps & Quality Gates
+```json
+// .eslintrc.json
+{
+  "extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-img-element": "off" // Using picture tag
+  }
+}
+```
+
+```bash
+# .husky/pre-commit
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run lint        # ESLint + Tailwind plugin
+npm run type-check  # TypeScript strict
+npm run test:unit   # Vitest for hooks/utils
+
+# Block commit if console.log or TODO without issue
+! git diff --cached --grep='console\.log\|// TODO' --quiet && \
+  echo "❌ Remove console.log and TODO comments before commit" && exit 1 || exit 0
+```
+
+```env
+# .env.example (JANGAN commit .env)
+NEXT_PUBLIC_SITE_URL=https://yoursite.com
+NEXT_PUBLIC_ANALYTICS_ID=
+NEXT_PUBLIC_FEATURE_PARALLAX=false
+
+# .env.local (gitignored)
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+---
+
+## 8. ✅ AI EXECUTION CHECKLIST & DEFINITION OF DONE
+
+### 🔍 SELF-CHECK REPORT (MANDATORY BEFORE OUTPUT)
+```markdown
+## 🧾 WEB EDITORIAL SELF-CHECK
+
+### Layout & Design
+- [ ] Layout intentionally asymmetric in ≥2 sections?
+- [ ] Typography uses clamp() + feels like structural element?
+- [ ] Depth created via layering (backdrop-blur, shadows, overlapping)?
+- [ ] Mobile uses horizontal scroll/rearrangement (not just stacking)?
+
+### Code Quality
+- [ ] Page component <500 lines? Layout pattern <300 lines?
+- [ ] No magic z-index (use CSS layers)? No hardcoded breakpoints?
+- [ ] Images have width/height/aspect-ratio? Fonts preloaded?
+- [ ] No console.log, any, dangerouslySetInnerHTML in final?
+
+### Performance & A11y
+- [ ] LCP <2.0s strategy implemented (preload, critical CSS)?
+- [ ] CLS <0.05 (reserved space, font swap)?
+- [ ] INP <200ms (debounce, CSS transitions)?
+- [ ] Accessibility: focus states, contrast, aria-labels, reduced-motion?
+
+### SEO & Universal
+- [ ] Semantic HTML structure (article, section, nav)?
+- [ ] Structured data (JSON-LD) for key content?
+- [ ] URL-based state for shareable filters/tabs?
+- [ ] i18n ready (no hardcoded text, logical properties)?
+
+### Final
+- [ ] If unsure about layout/interaction → ASK USER?
+- [ ] Code reads like prose? Comments explain WHY, not WHAT?
+```
+
+❌ **Jika ada SATU saja yang tidak tercentang → BATALKAN, REFACTOR, KIRIM ULANG.**
+
+### 🏁 DEFINITION OF DONE (Web Editorial)
+```
+✅ Layout intentionally asymmetric in ≥2 sections
+✅ Typography uses clamp() + feels like design element
+✅ Depth via backdrop-blur, shadows, or overlapping elements
+✅ Mobile: horizontal scroll or unique stacking (not just vertical list)
+✅ Core Web Vitals: LCP <2.0s, CLS <0.05, INP <200ms
+✅ Accessibility: keyboard nav, contrast, aria-labels, reduced-motion
+✅ SEO: semantic HTML, structured data, URL-based state
+✅ No tech debt untracked
+✅ User flow feels intentional, editorial, immersive
+```
+
+---
+
+## 📎 APPENDIX: UNIVERSAL WEB CHEAT SHEET
+
+### 📐 Layout Quick Picks
+```
+Broken Grid: grid grid-cols-12 gap-6 md:gap-8 + col-span-7/5 pattern
+Bento 2.0: grid grid-cols-12 grid-rows-6 gap-6 + variable spans
+Horizontal Scroll: flex overflow-x-auto snap-x snap-mandatory pb-8
+Sticky Section: sticky top-0 z-30 bg-white/80 backdrop-blur
+Container Query: @container (min-width: 400px) { .card { flex-direction: row; } }
+```
+
+### 🔤 Typography Quick Picks
+```
+Display: text-[clamp(3rem,8vw+1rem,8rem)] font-black tracking-tighter leading-[0.9]
+H1: text-[clamp(2.5rem,5vw+1rem,4.5rem)] font-bold leading-[1.0]
+Body: text-[clamp(1rem,0.25vw+0.9rem,1.125rem)] font-medium leading-relaxed
+Eyebrow: text-xs uppercase tracking-[0.3em] text-emerald-600 font-bold
+Drop Cap: first-letter:text-7xl first-letter:font-black first-letter:float-start first-letter:me-3
+```
+
+### 🎨 Color Quick Picks (Semantic)
+```
+Primary: oklch(0.65 0.2 150) | Success: oklch(0.6 0.18 145)
+Warning: oklch(0.75 0.18 85) | Error: oklch(0.55 0.25 25)
+Surface: oklch(0.98 0.01 250) | Text: oklch(0.15 0.02 260)
+Border: oklch(0.85 0.02 260) | Deep: oklch(0.95 0.01 250)
+```
+
+### 🌊 Interaction Quick Picks
+```
+Hover Lift: hover:-translate-y-1 hover:shadow-[0_12px_40px_rgb(0,0,0,0.12)] transition-all
+Glass Card: bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgb(0,0,0,0.08)]
+Scroll Reveal: [animation-timeline:view()] [animation-range:entry_10%_cover_30%]
+Parallax: will-change-transform data-scroll-speed="0.5"
+```
+
+### ♿ Accessibility Quick Picks
+```
+Focus: focus-visible:ring-4 focus-visible:ring-emerald-500/50 outline-none
+Skip Link: fixed top-4 start-4 z-50 bg-emerald-600 text-white px-4 py-2 rounded-lg sr-only focus:not-sr-only
+Reduced Motion: @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+Contrast: text-[var(--color-text)] on bg-[var(--color-surface)] = 4.5:1 minimum
+```
+
+---
+
+## 🎯 GOLDEN RULES (WEB EDITORIAL)
+
+```
+✅ Asymmetry > Forced symmetry
+✅ Depth > Flat design
+✅ Intentional whitespace > Cramped content
+✅ Scroll storytelling > Static pages
+✅ Typography as structure > Typography as text
+✅ Mobile rearrangement > Mobile stacking
+✅ Performance baked-in > Performance as afterthought
+✅ Accessibility from day 1 > Accessibility as checkbox
+✅ Universal (multi-script) > Latin-only assumption
+✅ Ask when unsure > Assume and hallucinate
+```
+
+---
+
+> ⚠️ **KONTRAK TERAKHIR:**  
+> Dokumen ini adalah **satu-satunya sumber kebenaran** untuk pembuatan website profesional.  
+> Versi sebelumnya dianggap **deprecated**.  
+> AI/Engineer yang melanggar → dianggap *hallucination* → output **dibuang**.  
+> **Think Spatial. Design Editorial. Ship Immersive. Scale Universal.**
+
+**Version: 4.0 (Universal Web Editorial • Zero-Hallucination) | Status: Production-Ready ✅**

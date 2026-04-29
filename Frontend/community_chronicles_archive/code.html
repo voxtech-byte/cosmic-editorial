@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Chronicles - Cosmic Editorial</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Space+Grotesk:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-primary": "#381e72",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-container": "#503d00",
+                        "surface-dim": "#141218",
+                        "outline": "#948e9c",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-container-highest": "#36343a",
+                        "on-tertiary": "#3e2e00",
+                        "outline-variant": "#494551",
+                        "surface-container-low": "#1d1b20",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#cfbcff",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#c9a74d",
+                        "surface-container-lowest": "#0f0d13",
+                        "on-primary-fixed": "#22005d",
+                        "secondary-container": "#4d4465",
+                        "on-secondary-container": "#bfb2da",
+                        "inverse-primary": "#6750a4",
+                        "primary-container": "#6750a4",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container": "#211f24",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "on-secondary-fixed": "#1f1635",
+                        "tertiary": "#e7c365",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#322f35",
+                        "on-surface-variant": "#cbc4d2",
+                        "on-background": "#e6e0e9",
+                        "primary-fixed": "#e9ddff",
+                        "secondary": "#cdc0e9",
+                        "inverse-surface": "#e6e0e9",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "primary": "#cfbcff",
+                        "on-surface": "#e6e0e9",
+                        "surface-variant": "#36343a",
+                        "on-primary-container": "#e0d2ff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#342b4b",
+                        "surface": "#141218"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin": "clamp(1rem, 5vw, 4rem)",
+                        "unit": "4px",
+                        "gutter": "2rem",
+                        "asymmetric-split": "7_5"
+                    },
+                    fontFamily: {
+                        "body-serif": ["Newsreader", "serif"],
+                        "body-sans": ["Manrope", "sans-serif"],
+                        "display-xl": ["Space Grotesk", "sans-serif"],
+                        "headline-lg": ["Space Grotesk", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-serif": ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }],
+                        "body-sans": ["1rem", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-xl": ["clamp(3rem, 10vw, 8rem)", { lineHeight: "0.9", letterSpacing: "-0.05em", fontWeight: "700" }],
+                        "headline-lg": ["clamp(2rem, 5vw, 4rem)", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "700" }],
+                        "arabic-modifier": ["1.125rem", { lineHeight: "1.8" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom utilities for styling constraints not easily mapped to pure classes without overwhelming HTML */
+        .glass-card {
+            background: rgba(33, 31, 36, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-sans min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+<!-- Atmospheric Layer (Background Depth) -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.15)_0%,rgba(20,18,24,0)_70%)] mix-blend-screen"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(231,195,101,0.08)_0%,rgba(20,18,24,0)_70%)] mix-blend-screen"></div>
+<!-- Subtle noise texture simulation via CSS -->
+<div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[length:4px_4px]"></div>
+</div>
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-10 py-4 bg-zinc-950/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+<div class="text-xl font-black tracking-widest text-zinc-100">COSMIC EDITORIAL</div>
+<div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-tight uppercase text-sm">
+<a class="text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 px-2 py-1" href="#">Nexus</a>
+<a class="text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 px-2 py-1" href="#">Inquiry</a>
+<a class="text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 px-2 py-1" href="#">Lab</a>
+<!-- Active State Logic Applied -->
+<a class="text-violet-400 border-b-2 border-violet-500 pb-1 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 px-2 py-1" href="#">Chronicles</a>
+</div>
+<div class="flex items-center gap-4 text-violet-500">
+<button class="hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="relative z-10 flex-grow pt-32 pb-margin px-margin max-w-[1600px] mx-auto w-full">
+<!-- Header -->
+<header class="mb-16 md:mb-24 relative">
+<div class="absolute -top-12 -left-8 text-primary/10 font-display-xl text-[12rem] leading-none select-none pointer-events-none">04</div>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-4">Chronicles</h1>
+<p class="font-body-serif text-body-serif text-on-surface-variant max-w-2xl text-xl">
+                An archive of synthesized observations. Where the empirical rigidity of quantum mechanics meets the eternal stillness of theological reflection.
+            </p>
+</header>
+<!-- Bento Grid Layout (7/5 Split) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-margin">
+<!-- 7-Column Span: Primary Narrative (Empirical) -->
+<div class="lg:col-span-7 glass-card rounded-xl overflow-hidden relative group h-[600px] flex flex-col justify-end p-8 transition-transform duration-700 ease-out hover:-translate-y-2">
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img alt="Scientific Phenomenon" class="w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:scale-105 transition-transform duration-[20s] ease-linear" data-alt="deep space nebula with vibrant purple and gold interstellar dust clouds forming complex organic structures in the void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeCQBNJ4dtjfOHlOQvhT1n5_MLKUDhcUCv7hywlYg_9vAtU6Wdu7RFa4JclY3Osvyh5bbOEfXTFhEgfJhcF5huI4eycIB3IoTlqGxkpmHnSlSY1TONaaM8C_9sdFSc7gVtAaRbcmJeLnR7ccNlcnybXhtis9kH4F0Aj-sr_wZhICPluvmfO86DKioxfaAXfPVJ-CIrHgLrZPRnBUgH4FWpfB8NOrp12aMA0CfekjuYq4NBVFlOR8zNSEHINpK6O4wqOJfD_qF2tWXc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 text-xs font-headline-lg tracking-widest text-primary border border-primary/30 rounded-full uppercase">Empirical Data</span>
+<span class="text-on-surface-variant font-mono text-xs">LOC: NGC-3324</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">The Resonance of Void</h2>
+<p class="font-body-sans text-body-sans text-on-surface-variant mb-6 max-w-xl">
+                        Analysis of low-frequency emissions from sector 4 indicates a non-random distribution of dark matter strands, suggesting a scaffolding pre-dating initial inflation models.
+                    </p>
+<button class="flex items-center gap-2 text-primary font-headline-lg text-sm tracking-widest uppercase hover:text-primary-fixed transition-colors">
+<span>Read Case Study</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 5-Column Span: Secondary Data & Reflection -->
+<div class="lg:col-span-5 flex flex-col gap-gutter h-full">
+<!-- Theological Reflection Card -->
+<div class="glass-card rounded-xl p-8 flex-1 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">auto_awesome</span>
+</div>
+<h3 class="font-headline-lg text-2xl text-tertiary mb-6">Ontological Echoes</h3>
+<div class="font-body-serif text-body-serif text-on-surface-variant space-y-4">
+<p>
+                            "If the void speaks in structures we can measure, is it still void? The ancients wrote of a firmament separating waters; we measure dark matter filaments separating galactic clusters."
+                        </p>
+<p class="text-sm italic opacity-70">
+                            — Extract from the Synthesis Logs, Vol IV.
+                        </p>
+</div>
+<!-- Data Callout -->
+<div class="mt-8 pt-6 border-t border-outline-variant/30 flex items-start gap-4">
+<div class="w-1 h-12 bg-tertiary/50 mt-1"></div>
+<div>
+<p class="font-mono text-xs text-outline mb-1">AI_INTERPRETATION_CONFIDENCE</p>
+<p class="font-display-xl text-xl text-on-surface">89.4%</p>
+</div>
+</div>
+</div>
+<!-- Auxiliary Data Card -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden flex items-center justify-between">
+<div>
+<p class="font-headline-lg text-sm text-secondary tracking-widest uppercase mb-1">Active Synthesis</p>
+<p class="font-body-sans text-on-surface">Correlating 12,041 sources</p>
+</div>
+<div class="w-12 h-12 rounded-full border border-secondary/30 flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-secondary">sync</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal Scroller: Diverse Perspectives -->
+<section class="mt-24 relative">
+<div class="flex items-end justify-between mb-8 px-4">
+<h2 class="font-headline-lg text-3xl text-on-surface">Multivalent Perspectives</h2>
+<div class="hidden md:flex gap-2">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Scroller Container -->
+<div class="w-full overflow-x-auto hide-scrollbar snap-x snap-mandatory flex gap-6 pb-12 px-4 -mx-4">
+<!-- Card 1 -->
+<article class="min-w-[320px] md:min-w-[400px] shrink-0 snap-center glass-card rounded-xl p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
+<div class="h-48 rounded-lg overflow-hidden mb-6 relative">
+<img alt="Quantum Interface" class="w-full h-full object-cover mix-blend-luminosity opacity-70" data-alt="abstract close-up of intersecting glass prisms and laser light beams refracting in a dark laboratory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASLaZgt7H-C7XpQ4cWdgzKZLP8f0ZFkwky1uvWq_EDGSmfVFMZe7BRlwGb707FulLiiNGZAnwDnDFhGZN6PwAompO7QVViDnwmWLWIX8yR98IfBeElIRsVUbfReHWWSQeVPewJ1ySR8p4vaUq3PGsADyMUI4vRQDYCPXN-Jyy3ay3yxeD_X16M1nX3AFTtQNza028AshHYr2LYF3cpIGON4NEhAJ2tz1MsSalVIfCNreVZ2LdsW2qD79DQsooUGb12xYQRZ1zLALLK"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-outline-variant text-on-surface-variant">PHYSICS</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-outline-variant text-on-surface-variant">LAB_02</span>
+</div>
+<h3 class="font-headline-lg text-xl text-on-surface mb-2">Entanglement Topology</h3>
+<p class="font-body-sans text-sm text-on-surface-variant line-clamp-3">
+                        Mapping the spacial configurations of entangled particles across macro-distances challenges the assumption of local realism.
+                    </p>
+</article>
+<!-- Card 2 (Text Heavy / Theological) -->
+<article class="min-w-[320px] md:min-w-[400px] shrink-0 snap-center glass-card rounded-xl p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer border-t-2 border-t-tertiary">
+<div class="h-48 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-colors-tertiary)_0%,_transparent_60%)]"></div>
+<span class="font-display-xl text-6xl text-tertiary/40 mix-blend-overlay">א</span>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-tertiary/30 text-tertiary">THEOLOGY</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-tertiary/30 text-tertiary">ARCHIVE_IX</span>
+</div>
+<h3 class="font-headline-lg text-xl text-on-surface mb-2">The Aleph Paradox</h3>
+<p class="font-body-serif text-sm text-on-surface-variant line-clamp-3 italic">
+                        If all points in space are simultaneously accessible in higher dimensions, the concept of a localized consciousness becomes a localized limitation of perception.
+                    </p>
+</article>
+<!-- Card 3 -->
+<article class="min-w-[320px] md:min-w-[400px] shrink-0 snap-center glass-card rounded-xl p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer border-t-2 border-t-secondary">
+<div class="h-48 rounded-lg overflow-hidden mb-6 relative">
+<img alt="AI Network" class="w-full h-full object-cover mix-blend-luminosity opacity-70" data-alt="geometric visualization of a neural network node cluster glowing with soft cyan and violet light in deep black space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEx3uedIf7YUC3iRg1FzwAT6TSFvio48b8BmliqY6PY69o6R0O9129aVl8CcDZpueXz4s3oXTdoNmItHJZeNEtfWfgCDa3usUJO0rdQFmsW3z89iaXOe3iePEnBzsaHomMDkmCvfZLwwKoaPQLeiOpadeCto06slbsCM-xG_8-5-uYf7dR3wreZfP0vH2ahEtcWckEyg0TMH7R6nk2KmGkN4lol7kpvgC8lerbTkeN2i194y8dubt6UJ7cjKD67cEoXZelAKDMWfQG"/>
+</div>
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-secondary/30 text-secondary">SYNTHESIS</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-secondary/30 text-secondary">V_0.9</span>
+</div>
+<h3 class="font-headline-lg text-xl text-on-surface mb-2">Algorithmic Divination</h3>
+<p class="font-body-sans text-sm text-on-surface-variant line-clamp-3">
+                        Machine learning models trained on mystical texts show a 64% correlation with quantum probability distributions in predictive outputs.
+                    </p>
+</article>
+<!-- Spacer for right padding in scroller -->
+<div class="w-4 shrink-0"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-950 full-width border-t border-white/5 pt-12 pb-24 mt-24 w-full max-w-7xl mx-auto px-12 flex flex-col items-center justify-center gap-8 relative z-20">
+<div class="text-sm font-bold text-zinc-400">COSMIC EDITORIAL</div>
+<nav class="flex flex-wrap justify-center gap-6 font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em]">
+<a class="text-zinc-600 hover:text-zinc-300 hover:tracking-[0.3em] transition-all duration-700 opacity-80 hover:opacity-100" href="#">Ethics Declaration</a>
+<a class="text-violet-400 font-bold hover:tracking-[0.3em] transition-all duration-700 opacity-80 hover:opacity-100" href="#">Archive</a>
+<a class="text-zinc-600 hover:text-zinc-300 hover:tracking-[0.3em] transition-all duration-700 opacity-80 hover:opacity-100" href="#">Citations</a>
+<a class="text-zinc-600 hover:text-zinc-300 hover:tracking-[0.3em] transition-all duration-700 opacity-80 hover:opacity-100" href="#">Newsletter</a>
+</nav>
+<p class="font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] text-zinc-600 text-center">
+            © 2024 COSMIC EDITORIAL. THE SYNTHESIS OF EMPIRICAL AND ETERNAL.
+        </p>
+</footer>
+</body></html>

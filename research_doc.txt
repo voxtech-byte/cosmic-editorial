@@ -1,0 +1,158 @@
+Media Pembelajaran Fenomena Luar Angkasa Terintegrasi Sains dan Agama dengan Dukungan Pengembangan Artificial Intelligence (Machine Learning) di MTs Sains Algebra Kota Sorong
+
+
+
+
+
+
+MTS SAINS ALGEBRA
+KOTA SORONG
+2026
+
+
+
+
+
+
+
+
+
+
+KATA PENGANTAR
+                         Assalamualaikum Warrahmatullahi Wabarakatuh
+Alhamdulillah. Puji serta Syukur kami panjatkan kepada Allah SWT  atas Rahmat dan izin-Nya sehingga kami dapat menyelesaikan tugas makalah ini dengan mudah guna memenuhi tugas kelompok untuk mata Pelajaran kokulikuler yang berjudul “Media Pembelajaran Fenomena Luar Angkasa Terintegrasi Sains dan Agama dengan Dukungan Pengembangan Artificial Intelligence (Machine Learning)”
+ Sholawat serta salam kami tetap tercurahkan kepada nabi kita Muhammad SAW. Terima kasih kepada anggota kelompok kami yang telah berkontribusi dalam bentuk pikiran atau materi dalam menyelesaikan makalah ini.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BAB I 
+PENDAHULUAN
+
+	•	Latar Belakang
+Dalam pengaruh era baru peradaban dunia oleh dominasi teknologi, negara-negara besar telah banyak mengembangkan agensi dan menekankan pembangunan fasilitas terkait dan berhubungan dengan hal-hal berbau Antariksa atau luar angkasa, baik dalam aspek eksplorasi pengembangan Aerospace agency oleh Jet Propulsion Laboratory (JPL) Caltech dekat Pasadena, California NASA. Pun banyaknya platforms tempat pengembangan media sains yang terdapat fenomena, eksplorasi, images, bahkan update berita terkini mengenai apa yang terjadi di belahan bumi yang dikelola langsung oleh negara-negara besar. Selain itu, dalam kurung waktu ini pengembangan industri revolusi oleh kecerdasan buatan AI (Artificial Intellegence) telah memberi dampak signifikan terhadap hampir sebagian besar teknologi yang ada di genggaman kita saat ini. Akhir-akhir ini AI pun sudah banyak mempengaruhi progress spektakuler di berbagai jaringan sosial media, ekonomi, konstribusi besar dalam eksplorasi luar angkasa autopilot—yang dikembangkan oleh satelit NASA ataupun ESA—bahkan dominasi nya terhadap media pembelajaran pemerintah yang dapat diakses cepat hanya dengan menggunakan internet. Dampak AI dalam berbagai bidang industri Antariksa dan Fisika partikel berkembang secara berkala menggunakan berbagai teknik AI berdeda—khususnya metode machine learning dan deep learning—yang penggunaannya semakin ditingkatkan dalam berbagai gencatan penelitian sains ilmiah. Metode ini, yang awalnya diciptakan untuk aplikasi seperti pengenalan kejelasan gambar objek, telah terbukti sangat berguna dalam memperbaiki analisis data di bidang fisika energi tinggi. (World Scientific Publishing: Singapore, 2022.) Terbukti bahwa AI dapat menjadi salah satu alat dukung penting dalam relevansi sains, termasuk fenomena luar angkasa dalam kurikulum pembelajaran terkini. Sains luar angkasa jelas mendorong pemahaman Antariksa, tetapi sering kali kurang terintegrasi dengan nilai-nilai agama di sekolah Islam. Hal ini menyebabkan awamnya pengetahuan individu terhadap revolusi pengembangan teknologi sains luar angkasa. UNESCO menekankan bahwa pendidikan Science, Technology, Engineering, and Mathematics (STEM) sangat penting untuk membekali generasi muda dengan keterampilan abad ke-21 yang diperlukan untuk memecahkan masalah kompleks, termasuk melalui eksplorasi ruang angkasa. Dengan sebab ini, ketidaktahuan seorang individu dapat menjadi faktor utama lambatnya perkembangan intektualitas seseorang dalam lingkungan kita. UNESCO, melalui kerja sama dengan lembaga seperti United Nations Office for Outer Space Affairs (UNOOSA), mendorong pemanfaatan data dan aktivitas luar angkasa—termasuk dari International Space Station (ISS)—sebagai instrumen pendidikan. Hal yang bertujuan untuk memfasilitasi pemahaman mendalam tentang bumi, lingkungan, serta teknologi, sebuah fondasi contoh bagaimana industri besar telah menekankan pengaplikasi sains luar angkasa. Siswa sering kali membedakan kedua hal tersebut—Fenomena Sains luar angkasa dan Agama—padahal jika keduanya digabungkan, individu dapat memahami suatu konsep ilmiah dengan prinsip agama yang kokoh. Banyaknya tantangan siswa yang dihadapi dalam masalah utama ini. Kurangnya media pembelajaran interaktif yang lambat dikembangkan, jarang adanya konsep pemahaman abstrak mengenai sains, atau konteks lokal seperti keterbatasan fasilitas atau kurikulum yang belum optimal. Peneliti menggunakan dukungan AI (Artificial Intellegence) yang menggunakan motede machine learning sederhana dalam mengatasi keterbatasan pengetahuan terhadap sains luar angkasa tersebut.
+
+
+
+
+1.2 Rumusan Masalah
+Berdasarkan latar belakang tersebut, terdapat dua faktor utama yang menjadi permasalahan dalam penelitian ini:
+	•	Keterbatasan Teknologi dalam media Pembelajaran sehingga terputusnya akses cepat untuk informasi terbaru terkait perkembangan sains luar angkasa.
+	•	Minimnya minat peserta didik dan orang awan terhadap sains luar angkasa, padahal kurikulum STEM menekankan perkembangan sains teruntuk generasi muda. 
+1.3 Tujuan Penelitian
+Tujuan penelitian ini adalah menciptakan sebuah prototipe media pembelajaran dalam upaya pengembangan platform terintegrasi Sains dan agama dengan dukungan kecerdasan buatan AI (Artificial Intellegence):
+	•	Dengan metode paling sederhana dan tidak kompleks. 
+	•	Peneliti mengaitkan metode dengan jajaran fenomena luar angkasa berbasis pemahaman agama. 
+	•	Sarana edukasi yang didukung oleh kurikulum STEM yang menampilkan update informasi, visualisasi, dan artikel secara berkala. 
+1.4 Manfaat Penelitian
+	•	Membantu orang orang yang tertarik dengan pembelajaran mengenai agama dan sains untuk mencari tau dan menemukan jawaban menggunakan platform didukung langsung oleh AI. 
+	•	Meningkatkan minat orang awam terdahap pengaruh Sains Antariksa, dan menyajikan update terbaru tentang fenomena luar angkasa dan kemajuan industri besar (seperti NASA atau ESA) dengan akses cepat yang didukung oleh AI (AI yang dipilih).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BAB II 
+KAJIAN PUSTAKA
+	•	Landasan Teori
+	•	Pengertian Media Pembelajaran berbasis teknologi digital dikombinasikan dengan AI; Secara definisi, sebuah media pembelajaran digital menggunakan support AI merupakan perpaduan antara teknologi informasi dan komunikasi dengan kemampuan sistem komputer yang mampu meniru fungsi kognitif manusia dalam mendukung proses belajar mengajar. Secara konsep, media pembelajaran digital adalah bahan ajar yang disajikan melalui perangkat elektronik seperti komputer, tablet, atau smartphone dengan memanfaatkan jaringan internet sebagai medianya. Ketika kombinasikan dengan AI, media tersebut menjadi lebih interaktif dan adaptif karena mampu menganalisis data pembelajaran, mengidentifikasi kelemahan peserta didik (Learner), serta menyesuaikan konten secara personal sesuai dengan kebutuhan dan tingkat pemahaman masing-masing pengguna. Dengan demikian, perpaduan ini menciptakan pengalaman belajar yang lebih efisien, menarik, dan efektif karena sistem dapat memberikan umpan balik secara langsung, merekomendasikan materi tambahan, bahkan memprediksi kesulitan belajar yang mungkin dihadapi Learner sebelum masalah tersebut terjadi.
+
+	•	Fenomena Luar Angkasa, Serta Integrasi Sains dan Agama:
+Kajian mengenai fenomena luar angkasa, dalam perspektif sains modern, telah berkembang pesat seiring dengan kemajuan teknologi bidang observasi astronomi  dan astrofisika. Alam semesta dipandang sebagai entitas fisik yang dapat diukur, dianalisis, dan dipahami melalui hukum-hukum alam yang telah berlaku. Namun, dalam pengetahuan keilmuan Islam, fenomena kosmik ini tidak semata-mata dipandang sebagai objek material, melainkan juga sebagai manifestasi dari Ayat Kauniyah (tanda-tanda kebesaran Allah). Al-Qur'an secara eksplisit menginstruksikan umat manusia untuk melakukan tadabbur (perenungan) terhadap penciptaan langit dan bumi, sebagaimana terdapat dalam berbagai ayat yang merujuk pada fenomena kosmik, orbit planet, bahkan sampai pada topik ekspansi alam semesta. Oleh karena itu, fenomena luar angkasa menjadi titik temu yang krusial antara penemuan ilmiah sains dan kebenaran wahyu dalam agama islam. Sebagai salah satu contoh kebenaran ayat suci Al-Qur'an dalam menjelaskan fenomena kosmik, terdapat dalam QS. Al-Anbiya ayat 33, yang menjelaskan tentang peredaran orbit tata surya, dimana sangat sesuai dengan materi peserta didik (Leaner) dalam kurikulum merdeka:
+
+وَهُوَ الَّذِيْ خَلَقَ الَّيْلَ وَالنَّهَارَ وَالشَّمْسَ وَالْقَمَرَۗ كُلٌّ فِيْ فَلَكٍ يَّسْبَحُوْنَ ۝٣٣ 
+Terjemahan: "Dan Dialah yang telah menciptakan malam dan siang, matahari dan bulan. Masing-masing beredar pada garis edarnya." (QS. Al-Anbiya: 33).
+
+Berdasarkan tafsiran dari salah satu ayat tersebut, menjelaskan secara jelas bahwa bumi, matahari, dan bulan, berputar sesuai dengan poros orbitnya masing-masing. Setiap objek di tata surya berevolusi dan berotasi secara elips, Rotasi bumi merupakan pergantian siang-dan malam. Adanya waktu siang dan malam disebabkan karena perputaran bumi pada sumbunya, di samping peredarannya mengelilingi matahari.
+Bumi dapat melengkapkan satu putaran setiap hari (24 jam) karena bumi terus berputar pada porosnya sendiri saat mengelilingi matahari. Perputaran ini menghasilkan kejadian siang dan malam. Hal ini dijelaskan secara lebih lanjut dalam QS. Az-Zummar ayat 5, Allah SWT berfirman tentang peristiwa ini: 
+
+السَّمٰوٰتِ وَالْاَرْضَ بِالْحَقِّۚ يُكَوِّرُ الَّيْلَ عَلَى النَّهَارِ وَيُكَوِّرُ النَّهَارَ عَلَى الَّيْلِ وَسَخَّرَ الشَّمْسَ وَالْقَمَرَۗ كُلٌّ يَّجْرِيْ لِاَجَلٍ مُّسَمًّىۗ اَلَا هُوَ الْعَزِيْزُ الْغَفَّارُ ۝٥
+Terjemahan:
+“Dia menciptakan langit dan bumi dengan (tujuan) yang benar; Dia menutupkan malam atas siang dan menutupkan siang atas malam dan menundukkan matahari dan bulan, masing-masing berjalan menurut waktu yang ditentukan. ingatlah Dialah yang Maha Perkasa lagi Maha Pengampun” (QS. Az-Zummar: 5)
+
+Ini menunjukkan bahwa Bumi berbentuk bulat dan berputar pada porosnya karena pergantian malam dan siang yang terus-menerus (JICN: Jurnal Intelek dan Cendikiawan Nusantara). Ketika angkasawan Uni Soviet dan Yuri Gargarin melakukan perjalanan pesawat keliling Bumi pertama kali pada tahun 1961, mereka melihat hal yang sama. Menurut Ch-al-Cois, Bumi berbentuk bulat dan mengalami pergantian gelap dan terang dengan cepat. (Fathurrahman et al, 2023).
+
+    Dengan dua cuplikan ayat Al-Qur’an diatas, dapat disimpulkan bahwa Integrasi antara ilmu pengetahuan dan agama Islam ini berlandaskan pada prinsip Tawhid, yang menegaskan bahwa kebenaran hakiki adalah satu kesatuan yang utuh. Apabila terjadi perbedaan antara temuan sains dan teks agama, hal itu umumnya disebabkan oleh cara kita menafsirkannya atau keterbatasan media tersaji, bukan karena adanya pertentangan yang sebenarnya. Sains bertugas menjelaskan mekanisme atau cara kerja alam semesta baik secara teori tau perhitungan kuantitatif dengan bukti nyata, sedangkan agama memberikan jawaban mengenai tujuan dan awal sebelum penciptaan tersebut. Kemajuan astronomi modern justru dapat memperkuat keyakinan terhadap kebesaran Allah, asalkan dipahami dengan pendekatan yang menyeluruh serta sumber media pembelajaran yang jelas.
+
+	•	Pengertian Machine Learning sebagai acuan Algoritma Penelitian:
+Mechine Learning sebagai acuan algoritma penelitian untuk mengambangkan sebuah aplikasi merupakan hal yang sangat mendasar dalam mengembangkan sebuah sistem berbasis software atau perangkat lunak. Dengan menggunakan algoritma bahasa pemograman sederhana, kita bahkan dapat secara mandiri membuat sebuah sistem sederhana hanya dengan mencari panduan di Internet (kurang lebih, hal tersebut yang kami lakukan). Ditambah lagi dengan support dari AI yang semakin anggih, kami berusaha mengupayakan sebuah media pembelalajaran yang mengoptimalkan sistem pengolahan informasi berbasis Machine Learning sederhana yang membantu memproses informasi, mengolah data agar sesuai dengan prinsip agama yang kami terapkan, serta prosedur ilmiah agar sesuai dengan kerangka acuan sains (terintegrasi Antariksa) yang kami tekankan gagasannya.
+  
+2.2. Penelitian Terdahulu
+	•	(SKIP DULU BINGUNG)
+
+	•	 Kerangka Berpikir 
+	•	Pembelajaran fenomena luar angkasa merupakan bagian penting dalam mata pelajaran sains, namun seringkali sulit dipahami oleh peserta didik karena konsepnya yang bersifat abstrak. Selain itu, proses pembelajaran masih cenderung menggunakan metode konvensional sehingga kurang menarik minat belajar siswa. Di sisi lain, pembelajaran di madrasah diharapkan mampu mengintegrasikan antara ilmu pengetahuan dan nilai-nilai agama, namun implementasinya masih belum optimal. Ditambah lagi dengan pengolahan informasi atau kalimat tepat yang mudah dipahami peserta didik (Learner) yang bisa dirancang dengan mudah menggunakan AI, akan lebih mengoptimalkan waktu yang meningkatkan produktivitas Learner dalam pembelajaran.
+	•	Berdasarkan hal tersebut, diperlukan suatu inovasi dalam bentuk media pembelajaran yang mampu memvisualisasikan fenomena luar angkasa secara menarik serta mengintegrasikan konsep sains dengan nilai-nilai agama. Pemanfaatan teknologi Artificial Intelligence berbasis Machine Learning dalam media pembelajaran dapat meningkatkan interaktivitas serta membantu peserta didik dalam memahami materi secara lebih efektif.
+	•	Oleh karena itu, penelitian ini mengembangkan media pembelajaran fenomena luar angkasa terintegrasi sains dan agama dengan dukungan Artificial Intelligence. Diharapkan media yang dikembangkan dapat meningkatkan pemahaman konsep, minat belajar, serta memberikan pengalaman belajar yang lebih bermakna bagi peserta didik. Tidak hanya itu, kami telah menambahkan prosedur teknis dengan mencampurkan kurikulum STEM (Science, Technology, Engineering, Mathematics) paling mendasar yang turut kami tambahkan dalam bahasa pemograman media pembelajaran kami. Pendekatan pembelajaran terintegrasi STEM yang menggabungkan lima disiplin ilmu tersebut untuk memecahkan masalah dunia nyata. STEM memiliki beberapa fokus utama yang mendorong peserta didik mengembangkan kreativitas, berpikir kritis, kolaborasi, dan keterampilan teknis siswa melalui pembelajaran berbasis proyek (project-based learning) yang menyenangkan dan bermakna. Kami telah mengoptimalkan dalam proyek prototipe kami melalui bahasa pemograman sederhana. Oleh karna itu, dapat dipastikan bahwa peserta didik akan mulai bisa menerapkan lima poin mendasar tersebut dalam pembelajaran.
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+BAB III 
+METODOLOGI PENELITIAN
+	•	Jenis Penelitian
+Jenis penelitian kami adalah R&D (Research and Development) dengan pendekatan kuantitatif berbasis pengujian awal. Penelitian ini menghasilkan produk media pembelajaran antariksa berbasis AI/ML. Pendekatan kuantitatif diwujudkan melalui pengumpulan data numerik dari hasil uji coba prototype kepada sejumlah responden spesifik (bukan survei). Data yang diambil hanya meliputi parameter teknis seperti akurasi sistem, kecepatan respons dari AI yang kami pilih, dan keberhasilan stabilitas. Analisis dilakukan secara deskriptif (persentase, rata-rata) untuk menilai kelayakan prototype. Tidak digunakan kuesioner dalam penelitian ini; pengujian dilakukan secara langsung oleh peneliti bersama responden atau penguji terbatas. Penggunaan metode R&D ini dipilih karena focus penelitian Adalah pada proses “rancang bangun” sebuah Solusi teknologi yang belum tersedia di sekolah, yaitu media pembelajaran menggunakan kecerdasan buatan yang mampu mengaitkan sains Antariksa dengan perspektif agama secara otomatis. Dalam kaitan ini, pendekatan kuantitatif yang diterapkan tidak bertujuan umtuk menggeneralisasi perilaku populasi, melaikan untuk melakukan validasi teknis terhadap fungsionalitas algoritma Machine Learning yang dikembangkan. Pengumpulan data numerik secara langsung (direct testing) yang di pandang lebih objektif daripada kuesioner persepsi, karena hasil yang diperoleh berupa angka pasti mengenai performa sistem dalam mengolah input penggunaan. Dengan demikian, kualitas media pembelajaran yang dihasilkan akan diukur melalui standar keandalan sistem (system reliability) dan ketepatan integrasi konten, sehingga hasil akhir yang di dapatkan merupakan produk yang teruji secara fungsional dan siap untuk digunakan sebagai sarana edukasi yang inovatif di MTs Sains Algebra Kota Sorong.
+
+	•	Tempat dan Waktu Penelitian
+Kami mengembangkan media pembelajaran interaktif ini secara berkala, saling bekerja sama di sekolah, menggunakan waku untuk meneliti yang telah disediakan sekolah, dan menyelesaikan pembuatan prototipe media pembelajaran kami dalam batas waktu yang telah ditentukan. Penelitian pengembangan ini dilaksanakan di MTs Sains Algebra Kota Sorong, Provinsi Papua Barat Daya. Pemilihan lokasi ini kami secara acak dengan sumber daya yang tim kam sediakan, satu buah laptop Asus Vivobook yang mendukung proses pengembangan sistem berbasis Artificial Intelligence serta relevansi subjek penelitian yang merupakan siswa madrasah sebagai target utama media pembelajaran sains terintegrasi agama. 
+Adapun waktu penelitian dilakukan dalam kurun waktu kurang lebih empat bulan, yaitu mulai bulan Januari 2026 sampai dengan April 2026. Rincian jadwal kegiatan penelitian meliputi tahap identifikasi masalah, pengumpulan dataset (sains dan dalil agama berupa tafsir ayat al quran), proses pelatihan model Machine Learning, pembuatan antarmuka website, hingga tahap pengujian teknis terhadap akurasi dan performa sistem.
+
+	•	Populasi dan Sampel
+Populasi dalam penelitian ini adalah seluruh siswa kelas VIII MTs Sains Algebra Kota Sorong yang sedang mempelajari materi antariksa. Mengingat penelitian ini berfokus pada pengembangan teknologi (Research and Development), pengambilan sampel dilakukan dengan teknik Purposive Sampling yang berorientasi pada pendekatan STEM. Sampel uji coba terdiri dari 5 orang peserta didik terpilih yang akan diberikan akses langsung ke prototipe media pembelajaran melalui tautan (private link). Pemilihan kelima responden ini didasarkan pada kriteria khusus, yaitu siswa yang memiliki pemahaman dasar yang kuat serta tingkat efektivitas dan produktivitas belajar yang tinggi. Hal ini bertujuan agar umpan balik teknis yang diberikan dapat lebih tajam dalam menilai kualitas integrasi antara sistem Machine Learning dengan konten sains-agama.
+
+	•	 Teknik dan Instrumen Pengumpulan Data
+Penelitian kami menggunakan Teknik pengumpulan data sederhana berbasis uji performa sistem (System Performance Test). Kami menekankan pengupayaan media pembelajaran yang berbeda dari metode konvensional. Intrumen teknikal kami menggunakan acuan AI, dirancang secara terstruktur untuk mengukur efektivitas media pembelajaran dari sisi fungsionalitas teknologi dan ketepatan konten.
+Mempersingkat durasi bab penelitian ini, berikutnya kami akan menjelaskan bagaimana sistem media pembelajaran kami bekerja melalui Mechine Learniing sederhana, yaitu menggunakan library Scikit-learn dengan metode TF-IDF atau Cosine Similarity.
+   3.4.1 
+  
+
+
+
+
+
+
+ 

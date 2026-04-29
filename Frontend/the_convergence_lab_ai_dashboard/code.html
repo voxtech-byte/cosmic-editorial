@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Convergence Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-primary": "#381e72",
+                        "primary-fixed-dim": "#cfbcff",
+                        "on-tertiary-container": "#503d00",
+                        "surface-dim": "#141218",
+                        "outline": "#948e9c",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-container-highest": "#36343a",
+                        "on-tertiary": "#3e2e00",
+                        "outline-variant": "#494551",
+                        "surface-container-low": "#1d1b20",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#cfbcff",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#c9a74d",
+                        "surface-container-lowest": "#0f0d13",
+                        "on-primary-fixed": "#22005d",
+                        "secondary-container": "#4d4465",
+                        "on-secondary-container": "#bfb2da",
+                        "inverse-primary": "#6750a4",
+                        "primary-container": "#6750a4",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container": "#211f24",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "on-secondary-fixed": "#1f1635",
+                        "tertiary": "#e7c365",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#322f35",
+                        "on-surface-variant": "#cbc4d2",
+                        "on-background": "#e6e0e9",
+                        "primary-fixed": "#e9ddff",
+                        "secondary": "#cdc0e9",
+                        "inverse-surface": "#e6e0e9",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "primary": "#cfbcff",
+                        "on-surface": "#e6e0e9",
+                        "surface-variant": "#36343a",
+                        "on-primary-container": "#e0d2ff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#342b4b",
+                        "surface": "#141218"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin": "clamp(1rem, 5vw, 4rem)",
+                        "unit": "4px",
+                        "gutter": "2rem",
+                        "asymmetric-split": "7_5"
+                    },
+                    fontFamily: {
+                        "body-serif": ["Newsreader"],
+                        "body-sans": ["Manrope"],
+                        "display-xl": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"]
+                    },
+                    fontSize: {
+                        "body-serif": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sans": ["1rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-xl": ["clamp(3rem, 10vw, 8rem)", { "lineHeight": "0.9", "letterSpacing": "-0.05em", "fontWeight": "700" }],
+                        "headline-lg": ["clamp(2rem, 5vw, 4rem)", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "arabic-modifier": ["1.125rem", { "lineHeight": "1.8" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.02"/%3E%3C/svg%3E');
+        }
+        .glass-panel {
+            background: rgba(33, 31, 36, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .glow-indigo {
+            background: radial-gradient(circle at 50% 50%, rgba(103, 80, 164, 0.15), transparent 70%);
+        }
+        .glow-emerald {
+            background: radial-gradient(circle at 50% 50%, rgba(77, 68, 101, 0.2), transparent 70%); /* Using secondary container for cool tone */
+        }
+        .glow-amber {
+            background: radial-gradient(circle at 50% 50%, rgba(231, 195, 101, 0.1), transparent 70%); /* Using tertiary */
+        }
+        
+        /* Spring bounce animation for buttons */
+        @keyframes spring-press {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); box-shadow: inset 0 0 0 2px var(--tw-colors-primary); }
+            100% { transform: scale(0.98); }
+        }
+        .btn-tactile:active {
+            animation: spring-press 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen font-body-sans flex">
+<!-- TopAppBar for Mobile (Fallback as per responsive pivot) -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-10 py-4 bg-zinc-950/60 backdrop-blur-2xl docked full-width top-0 border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] lg:hidden">
+<div class="text-xl font-black tracking-widest text-zinc-100 font-['Space_Grotesk'] uppercase">COSMIC EDITORIAL</div>
+<nav class="hidden md:flex gap-6">
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 transition-transform duration-200 px-2 py-1" href="#">Nexus</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 transition-transform duration-200 px-2 py-1" href="#">Inquiry</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-violet-400 border-b-2 border-violet-500 pb-1 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 transition-transform duration-200 px-2 py-1" href="#">Lab</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all duration-500 ease-out active:scale-95 transition-transform duration-200 px-2 py-1" href="#">Chronicles</a>
+</nav>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-violet-500 hover:bg-white/5 transition-all duration-500 ease-out cursor-pointer p-2 rounded-full active:scale-95 transition-transform duration-200" data-icon="search">search</span>
+<span class="material-symbols-outlined text-violet-500 hover:bg-white/5 transition-all duration-500 ease-out cursor-pointer p-2 rounded-full active:scale-95 transition-transform duration-200" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="fixed left-0 top-0 h-full w-64 z-40 hidden lg:flex flex-col py-8 bg-zinc-950/40 backdrop-blur-xl rounded-r-2xl h-[calc(100vh-4rem)] mt-16 border-r border-white/5 shadow-2xl shadow-indigo-500/10">
+<div class="px-6 mb-12">
+<h1 class="text-lg font-bold text-zinc-200 font-['Space_Grotesk'] tracking-widest uppercase">SYNTHESIS</h1>
+<p class="font-['Space_Grotesk'] text-xs font-medium tracking-widest text-violet-500 mt-1">V0.1-BETA</p>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 text-zinc-500 py-3 px-6 hover:bg-zinc-800/50 hover:text-zinc-100 transition-colors Active: scale-98 transition-all spring-bounce font-['Space_Grotesk'] text-xs font-medium tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                Nexus
+            </a>
+<a class="flex items-center gap-4 text-zinc-500 py-3 px-6 hover:bg-zinc-800/50 hover:text-zinc-100 transition-colors Active: scale-98 transition-all spring-bounce font-['Space_Grotesk'] text-xs font-medium tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                Inquiry
+            </a>
+<a class="flex items-center gap-4 bg-violet-500/10 text-violet-400 border-r-4 border-violet-500 py-3 px-6 hover:bg-zinc-800/50 hover:text-zinc-100 transition-colors Active: scale-98 transition-all spring-bounce font-['Space_Grotesk'] text-xs font-medium tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="biotech" style="font-variation-settings: 'FILL' 1;">biotech</span>
+                Lab
+            </a>
+<a class="flex items-center gap-4 text-zinc-500 py-3 px-6 hover:bg-zinc-800/50 hover:text-zinc-100 transition-colors Active: scale-98 transition-all spring-bounce font-['Space_Grotesk'] text-xs font-medium tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+                Chronicles
+            </a>
+</div>
+<div class="px-6 mt-auto">
+<img alt="Cosmic Observer Profile" class="w-10 h-10 rounded-full object-cover border border-white/10" data-alt="profile avatar of a mysterious figure in space suit reflecting nebulae" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfb5WmCtBVkkSc54PrJvm3w-PCQX6uOqgnno-P2_a_vqZrCMYmoXZGiq_2UQHKqNC59iGSn-l6fk2bmACdrmzj0kYRb4aD-Wghkk3-yfbZ9-D13Yvyk3KtHo0IK-BitGkPFk52r6tShZhV7pz1ocyVgEXhxj_8ku99HNYclCA1pbsgwchm6T2Mc3CEa-lzRMCwSU860HC6n7kTLgnQr8enNLqEkUgLo8JvmBOtKqW2agC2_iYDGOSKvmkD50HU0WWvq1ItR_-vbpJ5"/>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 w-full lg:ml-64 pt-24 lg:pt-16 px-6 lg:px-12 pb-24 min-h-screen overflow-y-auto relative">
+<!-- Atmospheric Depth Layers -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] glow-indigo -z-10 mix-blend-screen pointer-events-none"></div>
+<div class="absolute bottom-0 left-[20%] w-[600px] h-[600px] glow-amber -z-10 mix-blend-screen pointer-events-none"></div>
+<!-- Header -->
+<header class="mb-12 relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">The Convergence Lab</h2>
+<p class="font-body-serif text-body-serif text-on-surface-variant max-w-2xl">A synthesis interface harmonizing empirical data streams with vast linguistic models to unearth underlying truths.</p>
+</header>
+<!-- Bento Grid 7/5 Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+<!-- 7 Span: AI Synthesis Tool -->
+<div class="lg:col-span-7 glass-panel rounded-xl p-8 flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent opacity-50"></div>
+<div class="flex justify-between items-start mb-8">
+<h3 class="font-display-xl text-[1.5rem] leading-tight text-primary font-bold">Neural Synthesis</h3>
+<span class="material-symbols-outlined text-primary/50" data-icon="graphic_eq">graphic_eq</span>
+</div>
+<div class="flex-1 flex flex-col gap-4">
+<div class="bg-surface-container-low/50 rounded-lg p-4 border border-outline-variant/30 min-h-[200px] font-body-sans text-body-sans text-on-surface-variant">
+<p class="mb-2"><span class="text-primary font-bold">Observer:</span> Initiate cross-reference between quantum tunneling rates in chlorophyll and ancient Vedic texts on light.</p>
+<p class="opacity-70">Awaiting input stream...</p>
+</div>
+<div class="relative mt-auto">
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-4 pl-6 pr-32 font-body-sans text-body-sans text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-on-surface-variant/50" placeholder="Enter parameters for synthesis..." type="text"/>
+<button class="absolute right-2 top-2 bottom-2 bg-primary text-on-primary font-bold px-6 rounded-full btn-tactile hover:bg-primary-fixed-dim transition-colors flex items-center gap-2">
+                            Synthesize
+                            <span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 5 Span: Data Visualization Pane -->
+<div class="lg:col-span-5 glass-panel rounded-xl p-8 flex flex-col relative">
+<div class="absolute top-0 right-0 w-[300px] h-[300px] glow-emerald opacity-50 -z-10 pointer-events-none"></div>
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-display-xl text-[1.25rem] text-secondary tracking-tight">Empirical Streams</h3>
+<div class="px-3 py-1 rounded-full bg-secondary-container/30 border border-secondary/20 text-secondary text-xs font-bold uppercase tracking-widest">Live</div>
+</div>
+<div class="flex-1 border border-outline-variant/20 rounded-lg bg-surface-container-lowest/50 relative overflow-hidden flex items-end p-4 h-[250px]">
+<!-- Abstract Data Representation -->
+<div class="w-full h-full flex items-end gap-2 justify-between px-2">
+<div class="w-1/6 bg-secondary/40 h-[40%] rounded-t-sm hover:h-[45%] transition-all duration-500"></div>
+<div class="w-1/6 bg-secondary/60 h-[70%] rounded-t-sm hover:h-[75%] transition-all duration-500"></div>
+<div class="w-1/6 bg-secondary/80 h-[50%] rounded-t-sm hover:h-[55%] transition-all duration-500"></div>
+<div class="w-1/6 bg-secondary h-[90%] rounded-t-sm hover:h-[95%] transition-all duration-500 shadow-[0_0_15px_rgba(205,192,233,0.3)]"></div>
+<div class="w-1/6 bg-secondary/50 h-[30%] rounded-t-sm hover:h-[35%] transition-all duration-500"></div>
+</div>
+<!-- Callout -->
+<div class="absolute top-4 left-4 bg-surface-container/80 backdrop-blur-md border border-secondary/30 px-3 py-2 rounded-md flex flex-col">
+<span class="font-body-sans text-[10px] uppercase text-secondary tracking-widest">Variance</span>
+<span class="font-body-sans text-lg font-bold text-on-surface">4.892<span class="text-sm text-secondary ml-1">μ</span></span>
+</div>
+</div>
+</div>
+<!-- 5 Span: Reflective Insight -->
+<div class="lg:col-span-5 glass-panel rounded-xl p-8 relative overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary" data-icon="psychology">psychology</span>
+<h3 class="font-display-xl text-[1.25rem] text-tertiary tracking-tight">Reflective Insight</h3>
+</div>
+<blockquote class="font-body-serif text-[1.25rem] leading-relaxed text-on-surface-variant italic border-l-2 border-tertiary/30 pl-6 my-6">
+                    "The deeper we peer into the structural integrity of the cosmos, the more it resembles a thought rather than a machine."
+                </blockquote>
+<div class="flex items-center gap-4 mt-8">
+<button class="bg-transparent border border-tertiary/30 text-tertiary px-6 py-2 rounded-full font-body-sans text-sm hover:bg-tertiary/10 btn-tactile transition-colors">
+                        Archive Thought
+                    </button>
+</div>
+</div>
+<!-- 7 Span: Deep Dive / Data Table -->
+<div class="lg:col-span-7 glass-panel rounded-xl p-8">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-display-xl text-[1.25rem] text-on-surface tracking-tight">Active Nodes</h3>
+<button class="flex items-center gap-2 text-primary hover:text-primary-fixed text-sm font-bold tracking-widest uppercase transition-colors btn-tactile">
+                        Export <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</div>
+<div class="w-full">
+<div class="grid grid-cols-12 gap-4 pb-4 border-b border-white/5 font-body-sans text-xs uppercase tracking-widest text-on-surface-variant/60">
+<div class="col-span-6">Entity Signature</div>
+<div class="col-span-3">Resonance</div>
+<div class="col-span-3 text-right">Status</div>
+</div>
+<div class="flex flex-col gap-2 pt-4">
+<div class="grid grid-cols-12 gap-4 items-center py-3 hover:bg-white/5 px-2 -mx-2 rounded-lg transition-colors cursor-pointer">
+<div class="col-span-6 font-body-sans text-on-surface flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(207,188,255,0.8)]"></div>
+                                Node Alpha-7
+                            </div>
+<div class="col-span-3 font-body-sans text-on-surface-variant">98.2%</div>
+<div class="col-span-3 text-right font-body-sans text-primary text-sm">Harmonic</div>
+</div>
+<div class="grid grid-cols-12 gap-4 items-center py-3 hover:bg-white/5 px-2 -mx-2 rounded-lg transition-colors cursor-pointer">
+<div class="col-span-6 font-body-sans text-on-surface flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary/50"></div>
+                                Concept Vector B
+                            </div>
+<div class="col-span-3 font-body-sans text-on-surface-variant">42.1%</div>
+<div class="col-span-3 text-right font-body-sans text-on-surface-variant text-sm">Processing</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
