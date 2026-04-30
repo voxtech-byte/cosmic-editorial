@@ -13,7 +13,7 @@ export function Navigation() {
   return (
     <>
       {/* ── Desktop: Top Navbar ────────────────────────── */}
-      <nav className="fixed top-0 inset-s-0 w-full z-50 hidden md:flex items-center justify-between px-10 py-4 bg-space-void/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+      <nav className="fixed top-0 inset-s-0 w-full z-50 hidden md:flex items-center justify-between px-10 py-4 bg-space-void/70 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
         <div className="flex flex-col">
           <div className="font-[Space_Grotesk,sans-serif] text-xl font-black tracking-widest text-text-primary uppercase leading-tight">
             Cosmic Editorial
@@ -45,7 +45,7 @@ export function Navigation() {
       </nav>
 
       {/* ── Mobile: Floating Bottom Dock ──────────────── */}
-      <nav className="fixed bottom-4 inset-s-4 inset-e-4 z-50 flex md:hidden items-center justify-around py-3 px-2 bg-space-void/80 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-[0_-4px_32px_rgba(0,0,0,0.5)]">
+      <nav className="fixed bottom-4 inset-s-4 inset-e-4 z-50 flex md:hidden items-center justify-around py-3 px-2 bg-space-void/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_-4px_32px_rgba(0,0,0,0.5)]">
         {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}

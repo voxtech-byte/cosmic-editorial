@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { ArabicText } from '@/shared/ui/ArabicText';
@@ -6,10 +7,14 @@ import { ArrowRight, ExternalLink, FlaskConical } from 'lucide-react';
 
 /** Archive page — all phenomena with bento layout + horizontal scroller */
 export function ArsipPage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1400px] mx-auto w-full">
-      {/* Atmospheric Glows */}
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      {/* Atmospheric Glows - hidden on mobile for performance */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden hidden md:block">
         <div className="absolute top-[-15%] inset-s-[-10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.1)_0%,transparent_70%)]" />
       </div>
 
@@ -27,20 +32,25 @@ export function ArsipPage() {
       </header>
 
       {/* ── Phenomena Archive Grid ────────────────── */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 mb-32">
+      {/* Mobile: 2-column masonry | Desktop: Featured 8col + others 4col */}
+      <section className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-8 mb-32">
         {PHENOMENA.map((phenomenon, index) => {
-          // Featured archive item (first one) takes 8 columns, others take 4
-          const colSpan = index === 0 ? 'md:col-span-8' : 'md:col-span-4';
+          // Mobile: All items take 1 column (col-span-1 = half width)
+          // Desktop: First item takes 8 columns, others take 4
+          const mobileSpan = 'col-span-1';
+          const desktopSpan = index === 0 ? 'md:col-span-8' : 'md:col-span-4';
+          // Alternate heights for masonry feel on mobile
+          const mobileHeight = index % 3 === 0 ? 'aspect-[3/4]' : index % 3 === 1 ? 'aspect-square' : 'aspect-[4/5]';
           
           return (
             <Link
               key={phenomenon.id}
               to={`/eksplorasi?id=${phenomenon.id}`}
-              className={`col-span-12 ${colSpan} group scroll-reveal`}
+              className={`${mobileSpan} ${desktopSpan} group scroll-reveal`}
             >
               <GlassCard hover className="h-full flex flex-col p-0 overflow-hidden transition-all duration-500 hover:border-science/30">
                 {/* Card Image Banner */}
-                <div className={`${index === 0 ? 'h-64 md:h-80' : 'h-48'} w-full relative overflow-hidden`}>
+                <div className={`md:${index === 0 ? 'h-80' : 'h-48'} ${mobileHeight} w-full relative overflow-hidden`}>
                   <div 
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 bg-[image:var(--bg-image)]"
                     style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
@@ -48,10 +58,10 @@ export function ArsipPage() {
                   <div className="absolute inset-0 bg-linear-to-t from-surface-high via-transparent to-transparent" />
                   
                   {/* Category Badge */}
-                  <div className="absolute top-4 inset-x-4 flex items-center justify-between z-10">
-                    <div className="flex items-center gap-2 px-2 py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
+                  <div className="absolute top-2 md:top-4 inset-x-2 md:inset-x-4 flex items-center justify-between z-10">
+                    <div className="flex items-center gap-1.5 md:gap-2 px-1.5 md:px-2 py-0.5 md:py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
                       <div className={`w-1 h-1 rounded-full ${CATEGORY_META[phenomenon.category].color}`} />
-                      <span className={`text-[9px] font-bold uppercase tracking-[0.2em] ${CATEGORY_META[phenomenon.category].color}`}>
+                      <span className={`text-[8px] md:text-[9px] font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] ${CATEGORY_META[phenomenon.category].color}`}>
                         {CATEGORY_META[phenomenon.category].label}
                       </span>
                     </div>
@@ -59,24 +69,24 @@ export function ArsipPage() {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className={`font-[Space_Grotesk,sans-serif] ${index === 0 ? 'text-2xl md:text-4xl' : 'text-xl'} font-bold text-text-primary mb-3 leading-tight group-hover:text-science transition-colors`}>
+                <div className="p-3 md:p-6 flex-1 flex flex-col">
+                  <h3 className={`font-[Space_Grotesk,sans-serif] ${index === 0 ? 'md:text-4xl' : 'md:text-xl'} text-sm md:text-xl font-bold text-text-primary mb-2 md:mb-3 leading-tight group-hover:text-science transition-colors line-clamp-2 md:line-clamp-none`}>
                     {phenomenon.title}
                   </h3>
                   
-                  <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed line-clamp-3 mb-6 flex-1">
+                  <p className="font-[Manrope,sans-serif] text-[11px] md:text-sm text-text-muted leading-relaxed line-clamp-2 md:line-clamp-3 mb-4 md:mb-6 flex-1 hidden md:block">
                     {phenomenon.description}
                   </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                    <div className="flex gap-2">
+                  <div className="flex items-center justify-between pt-2 md:pt-4 border-t border-white/5 mt-auto">
+                    <div className="flex gap-1.5 md:gap-2">
                       {phenomenon.tags.slice(0, 2).map((tag) => (
-                        <span key={tag} className="text-[9px] font-mono text-text-dim/40 uppercase">
+                        <span key={tag} className="text-[8px] md:text-[9px] font-mono text-text-dim/40 uppercase">
                           #{tag}
                         </span>
                       ))}
                     </div>
-                    <ArrowRight className="w-4 h-4 text-text-dim group-hover:text-science group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-text-dim group-hover:text-science group-hover:translate-x-1 transition-all" />
                   </div>
                 </div>
               </GlassCard>
@@ -96,7 +106,7 @@ export function ArsipPage() {
             p.verses.map((verse, vi) => (
               <div
                 key={`${p.id}-${vi}`}
-                className="snap-center shrink-0 w-[85vw] md:w-[500px]"
+                className="snap-center shrink-0 w-[90vw] max-w-[500px]"
               >
                 <GlassCard className="bg-surface-low/60 border-s-4 border-s-reflection/50">
                   <ArabicText verse={verse} size="base" />
@@ -180,7 +190,7 @@ export function ArsipPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[
             {
               name: 'NASA',

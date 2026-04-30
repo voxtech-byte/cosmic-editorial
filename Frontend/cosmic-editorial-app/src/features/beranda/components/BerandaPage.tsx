@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { PHENOMENA, CATEGORY_META } from '@/entities/phenomena';
@@ -5,10 +6,14 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 /** Home page — Editorial hero + Asymmetric bento grid of real phenomena */
 export function BerandaPage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1400px] mx-auto w-full">
       {/* ── Atmospheric Background Glows ─────────── */}
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden hidden md:block">
         <div className="absolute top-[-20%] inset-s-[-10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.12)_0%,transparent_70%)]" />
         <div className="absolute bottom-[-20%] inset-e-[-10%] w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(231,195,101,0.06)_0%,transparent_70%)]" />
       </div>
@@ -83,13 +88,13 @@ export function BerandaPage() {
       </section>
 
       {/* ── Bento Grid: Phenomena ────────────────────── */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-24 mb-48">
-        {/* Featured Card — 7 columns, 2 rows */}
+      <section className="mb-48">
+        {/* Featured Card — Full width on all devices */}
         <Link
           to={`/eksplorasi?id=${PHENOMENA[0].id}`}
-          className="col-span-12 md:col-span-7 md:row-span-2 group"
+          className="block mb-6 md:mb-0 md:col-span-7 md:row-span-2 group"
         >
-          <GlassCard hover className="h-full min-h-[500px] flex flex-col justify-end relative overflow-hidden">
+          <GlassCard hover className="h-full min-h-[280px] sm:min-h-[350px] md:min-h-[500px] flex flex-col justify-end relative overflow-hidden">
             {/* Background Image with Parallax-like feel */}
             <div
               className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-1000 bg-[image:var(--bg-image)]"
@@ -102,7 +107,7 @@ export function BerandaPage() {
                 <Sparkles className="w-3 h-3" />
                 Featured Phenomenon
               </span>
-              <h2 className="font-[Space_Grotesk,sans-serif] text-4xl md:text-6xl font-bold text-text-primary leading-[0.85] mb-4 tracking-tighter">
+              <h2 className="font-[Space_Grotesk,sans-serif] text-3xl sm:text-4xl md:text-6xl font-bold text-text-primary leading-[0.85] mb-4 tracking-tighter">
                 {PHENOMENA[0].title}
               </h2>
               <p className="font-[Manrope,sans-serif] text-sm text-text-muted max-w-md line-clamp-3 leading-relaxed">
@@ -112,58 +117,95 @@ export function BerandaPage() {
           </GlassCard>
         </Link>
 
-        {/* Supporting Cards */}
-        {PHENOMENA.slice(1).map((phenomenon, i) => {
-          // i=0 is Index 1, i=1 is Index 2, etc.
-          // i=0 and i=1 should be col-5 to fit next to featured (col-7)
-          // i >= 2 should be col-6 to fill rows below
-          const isSideCard = i < 2;
-          const colSpan = isSideCard ? 'md:col-span-5' : 'md:col-span-6';
-          const margin = isSideCard 
-            ? (i === 0 ? 'md:mt-32' : 'md:-mt-16') 
-            : 'md:mt-0';
-
-          return (
+        {/* Mobile: Horizontal Scroll Gallery */}
+        <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory pb-4 gap-4 scrollbar-hide -mx-4 px-4">
+          {PHENOMENA.slice(1, 4).map((phenomenon) => (
             <Link
               key={phenomenon.id}
               to={`/eksplorasi?id=${phenomenon.id}`}
-              className={`col-span-12 ${colSpan} group ${margin}`}
+              className="snap-center shrink-0 w-[75vw] max-w-[300px] group"
             >
-              <GlassCard hover className="h-full min-h-[350px] flex flex-col justify-end p-0 overflow-hidden relative border-white/5 hover:border-white/10">
-                {/* Background Image */}
+              <GlassCard hover className="h-[280px] flex flex-col justify-end p-0 overflow-hidden relative border-white/5">
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-70 group-hover:scale-110 group-hover:opacity-90 transition-all duration-1000 bg-[image:var(--bg-image)]"
+                  className="absolute inset-0 bg-cover bg-center opacity-70 group-hover:scale-110 transition-all duration-1000 bg-[image:var(--bg-image)]"
                   style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-space-dark via-space-dark/80 to-transparent" />
 
-                {/* Content Area */}
-                <div className="relative z-10 p-8 flex flex-col justify-between h-full">
+                <div className="relative z-10 p-5 flex flex-col justify-between h-full">
                   <div className="flex items-center justify-between mb-auto">
-                    <div className="flex items-center gap-2 px-3 py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
+                    <div className="flex items-center gap-2 px-2.5 py-1 bg-space-dark/60 backdrop-blur-sm rounded-full border border-white/10">
                       <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_META[phenomenon.category].color}`} />
-                      <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${CATEGORY_META[phenomenon.category].color}`}>
+                      <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${CATEGORY_META[phenomenon.category].color}`}>
                         {CATEGORY_META[phenomenon.category].label}
                       </span>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-space-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-science group-hover:text-space-dark transition-all">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
                   </div>
 
-                  <div className="mt-12">
-                    <h3 className="font-[Space_Grotesk,sans-serif] text-2xl font-bold text-text-primary mb-3 leading-tight group-hover:text-science transition-colors">
+                  <div className="mt-8">
+                    <h3 className="font-[Space_Grotesk,sans-serif] text-xl font-bold text-text-primary mb-2 leading-tight group-hover:text-science transition-colors">
                       {phenomenon.title}
                     </h3>
-                    <p className="font-[Manrope,sans-serif] text-sm text-text-muted line-clamp-2 leading-relaxed">
+                    <p className="font-[Manrope,sans-serif] text-xs text-text-muted line-clamp-2 leading-relaxed">
                       {phenomenon.description}
                     </p>
                   </div>
                 </div>
               </GlassCard>
             </Link>
-          );
-        })}
+          ))}
+          <div className="w-4 shrink-0" />
+        </div>
+
+        {/* Desktop: Grid Layout */}
+        <div className="hidden md:grid md:grid-cols-12 gap-6 md:gap-8 mt-6">
+          {PHENOMENA.slice(1).map((phenomenon, i) => {
+            const isSideCard = i < 2;
+            const colSpan = isSideCard ? 'md:col-span-5' : 'md:col-span-6';
+            const margin = isSideCard 
+              ? (i === 0 ? 'md:mt-32' : 'md:-mt-16') 
+              : 'md:mt-0';
+
+            return (
+              <Link
+                key={phenomenon.id}
+                to={`/eksplorasi?id=${phenomenon.id}`}
+                className={`col-span-12 ${colSpan} group ${margin}`}
+              >
+                <GlassCard hover className="h-full min-h-[350px] flex flex-col justify-end p-0 overflow-hidden relative border-white/5 hover:border-white/10">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-70 group-hover:scale-110 group-hover:opacity-90 transition-all duration-1000 bg-[image:var(--bg-image)]"
+                    style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-space-dark via-space-dark/80 to-transparent" />
+
+                  <div className="relative z-10 p-8 flex flex-col justify-between h-full">
+                    <div className="flex items-center justify-between mb-auto">
+                      <div className="flex items-center gap-2 px-3 py-1 bg-space-dark/60 backdrop-blur-md rounded-full border border-white/10">
+                        <div className={`w-1.5 h-1.5 rounded-full ${CATEGORY_META[phenomenon.category].color}`} />
+                        <span className={`text-[10px] font-black uppercase tracking-[0.3em] ${CATEGORY_META[phenomenon.category].color}`}>
+                          {CATEGORY_META[phenomenon.category].label}
+                        </span>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-space-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-science group-hover:text-space-dark transition-all">
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <div className="mt-12">
+                      <h3 className="font-[Space_Grotesk,sans-serif] text-2xl font-bold text-text-primary mb-3 leading-tight group-hover:text-science transition-colors">
+                        {phenomenon.title}
+                      </h3>
+                      <p className="font-[Manrope,sans-serif] text-sm text-text-muted line-clamp-2 leading-relaxed">
+                        {phenomenon.description}
+                      </p>
+                    </div>
+                  </div>
+                </GlassCard>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       {/* ── Pilar STEM (Asymmetric 5:7) ────────────────── */}
@@ -179,24 +221,23 @@ export function BerandaPage() {
                 { title: 'Sains', desc: 'Hukum fisika semesta sebagai Sunnatullah.' },
                 { title: 'Teknologi', desc: 'AI & Observatorium Digital.' }
               ].map((p, i) => (
-                <div key={i} className="group border-s-2 border-white/5 ps-6 hover:border-science transition-colors">
-                  <h4 className="font-bold text-text-primary text-xl mb-2">{p.title}</h4>
+                <div key={i} className="group border-s-2 border-white/5 ps-4 md:ps-6 hover:border-science transition-colors">
+                  <h4 className="font-bold text-text-primary text-lg md:text-xl mb-2">{p.title}</h4>
                   <p className="text-sm text-text-muted leading-relaxed">{p.desc}</p>
                 </div>
               ))}
             </div>
           </div>
-          
-          <div className="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="md:mt-12">
-              <GlassCard className="h-full min-h-[300px] flex flex-col justify-center p-12 bg-reflection/5 border-reflection/10">
-                <h4 className="font-bold text-reflection text-2xl mb-4">Engineering</h4>
+              <GlassCard className="h-full min-h-[200px] md:min-h-[300px] flex flex-col justify-center p-6 md:p-12 bg-reflection/5 border-reflection/10">
+                <h4 className="font-bold text-reflection text-xl md:text-2xl mb-3 md:mb-4">Engineering</h4>
                 <p className="text-sm text-text-muted leading-relaxed">Desain wahana antariksa dan instrumen observasi sebagai solusi teknis eksplorasi manusia.</p>
               </GlassCard>
             </div>
             <div>
-              <GlassCard className="h-full min-h-[300px] flex flex-col justify-center p-12 bg-ai-accent/5 border-ai-accent/10">
-                <h4 className="font-bold text-ai-accent text-2xl mb-4">Mathematics</h4>
+              <GlassCard className="h-full min-h-[200px] md:min-h-[300px] flex flex-col justify-center p-6 md:p-12 bg-ai-accent/5 border-ai-accent/10">
+                <h4 className="font-bold text-ai-accent text-xl md:text-2xl mb-3 md:mb-4">Mathematics</h4>
                 <p className="text-sm text-text-muted leading-relaxed">Kalkulasi presisi periode revolusi dan penghitungan jarak dalam skala Tahun Cahaya.</p>
               </GlassCard>
             </div>
@@ -268,20 +309,21 @@ export function BerandaPage() {
             <h2 className="font-[Space_Grotesk,sans-serif] text-3xl md:text-5xl font-bold text-text-primary leading-[1.1] mb-8">
               Pilar Pendidikan <span className="text-science underline decoration-science/20 underline-offset-8">STEM</span>
             </h2>
-            <div className="space-y-8">
+            {/* Mobile: 2-column Grid | Desktop: Vertical List */}
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-8">
               {[
                 { title: 'Science (Sains)', desc: 'Mengkaji hukum fisika semesta—gravitasi, orbit, dan termodinamika bintang—sebagai wujud keteraturan Sunnatullah.' },
                 { title: 'Technology (Teknologi)', desc: 'Pemanfaatan AI Machine Learning dan observatorium digital untuk memproses data real-time dari NASA, ESA, dan BRIN.' },
                 { title: 'Engineering (Rekayasa)', desc: 'Memahami desain wahana antariksa, perisai panas, dan instrumen observasi sebagai solusi teknis eksplorasi manusia.' },
                 { title: 'Mathematics (Matematika)', desc: 'Kalkulasi presisi periode revolusi, konversi waktu (siang-malam), dan penghitungan jarak dalam skala Tahun Cahaya.' }
               ].map((pilar, i) => (
-                <div key={i} className="flex gap-5 group">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-surface-high border border-white/5 flex items-center justify-center font-[Space_Grotesk,sans-serif] font-bold text-science group-hover:bg-science group-hover:text-space-dark transition-all duration-300">
+                <div key={i} className="flex flex-col md:flex-row gap-3 md:gap-5 group">
+                  <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-surface-high border border-white/5 flex items-center justify-center font-[Space_Grotesk,sans-serif] font-bold text-science group-hover:bg-science group-hover:text-space-dark transition-all duration-300 text-sm md:text-base">
                     0{i+1}
                   </div>
                   <div>
-                    <h4 className="font-bold text-text-primary font-[Space_Grotesk,sans-serif] text-lg mb-1">{pilar.title}</h4>
-                    <p className="text-sm text-text-muted font-[Manrope,sans-serif] leading-relaxed max-w-md">{pilar.desc}</p>
+                    <h4 className="font-bold text-text-primary font-[Space_Grotesk,sans-serif] text-sm md:text-lg mb-1">{pilar.title}</h4>
+                    <p className="text-[11px] md:text-sm text-text-muted font-[Manrope,sans-serif] leading-relaxed max-w-md line-clamp-3 md:line-clamp-none">{pilar.desc}</p>
                   </div>
                 </div>
               ))}
@@ -289,25 +331,29 @@ export function BerandaPage() {
           </div>
           
           <div className="md:col-span-7 order-1 md:order-2">
-            <GlassCard className="aspect-square md:aspect-4/5 relative overflow-hidden p-0 border-0 group">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-2000 group-hover:scale-110 bg-[image:var(--bg-image)]" 
-                style={{ '--bg-image': `url('https://images.unsplash.com/photo-1614730321146-b6fa6a46bac4?w=1200&auto=format')` } as React.CSSProperties}
-              />
-              <div className="absolute inset-0 bg-linear-to-tr from-space-dark/90 via-space-dark/40 to-transparent" />
+            <GlassCard className="aspect-[4/5] sm:aspect-square md:aspect-4/5 relative overflow-hidden p-0 border-0 group min-h-[400px] sm:min-h-0">
+              {/* School Image Background */}
+              <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-10">
+                <img 
+                  src="/LOGO MTs.png" 
+                  alt="MTs Sains Algebra"
+                  className="w-full h-full max-h-[250px] sm:max-h-none object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                />
+              </div>
+              <div className="absolute inset-0 bg-linear-to-tr from-space-dark/80 via-space-dark/20 to-transparent" />
               
-              {/* Floating Badge */}
-              <div className="absolute top-8 inset-e-8 px-4 py-2 bg-science/20 backdrop-blur-xl border border-science/30 rounded-full">
+              {/* Floating Badge - Responsive positioning */}
+              <div className="absolute top-4 md:top-8 right-4 md:inset-e-8 left-4 md:left-auto px-3 md:px-4 py-1.5 md:py-2 bg-science/20 backdrop-blur-md md:backdrop-blur-xl border border-science/30 rounded-full text-center md:text-left">
                 <span className="text-[10px] font-bold text-science uppercase tracking-widest">MTs Sains Algebra Exclusive</span>
               </div>
 
-              <div className="absolute bottom-8 inset-s-8 inset-e-8 p-8 bg-surface-high/60 backdrop-blur-2xl rounded-3xl border border-white/10">
-                <p className="font-[Newsreader,serif] text-xl md:text-2xl text-white leading-relaxed italic mb-4">
+              <div className="absolute bottom-4 md:bottom-8 left-4 right-4 md:inset-s-8 md:inset-e-8 p-4 md:p-8 bg-surface-high/70 md:bg-surface-high/60 backdrop-blur-md md:backdrop-blur-2xl rounded-2xl md:rounded-3xl border border-white/10">
+                <p className="font-[Newsreader,serif] text-lg md:text-xl lg:text-2xl text-white leading-relaxed italic mb-3 md:mb-4">
                   "Sains menjelaskan mekanisme, agama menjelaskan tujuan. Keduanya adalah dua sayap bagi peradaban."
                 </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-1 rounded-full bg-science" />
-                  <span className="text-xs font-[Space_Grotesk,sans-serif] text-text-dim uppercase tracking-[0.2em]">Landasan Filosofis R&D</span>
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-6 md:w-10 h-1 rounded-full bg-science" />
+                  <span className="text-[10px] md:text-xs font-[Space_Grotesk,sans-serif] text-text-dim uppercase tracking-[0.2em]">Landasan Filosofis R&D</span>
                 </div>
               </div>
             </GlassCard>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { GlassCard } from '@/shared/ui/GlassCard';
 import { ArabicText } from '@/shared/ui/ArabicText';
@@ -10,6 +10,8 @@ export function EksplorasiPage() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id') || PHENOMENA[0].id;
   const phenomenon = getPhenomenon(id) || PHENOMENA[0];
+  // Mobile tab state for Science/Religion panels
+  const [activeMobileTab, setActiveMobileTab] = useState<'science' | 'religion'>('science');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -17,8 +19,8 @@ export function EksplorasiPage() {
 
   return (
     <main className="pt-24 md:pt-32 pb-32 px-page max-w-[1400px] mx-auto w-full relative">
-      {/* Atmospheric Glows */}
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      {/* Atmospheric Glows - simplified on mobile */}
+      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden hidden md:block">
         <div className="absolute top-[10%] inset-e-[-10%] w-[40vw] h-[40vw] rounded-full bg-[radial-gradient(circle,rgba(103,80,164,0.1)_0%,transparent_70%)]" />
         <div className="absolute bottom-[10%] inset-s-[-10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(231,195,101,0.06)_0%,transparent_70%)]" />
       </div>
@@ -59,15 +61,45 @@ export function EksplorasiPage() {
           className="w-full h-full object-cover"
           width={1200}
           height={450}
-          loading="eager"
+          loading="lazy"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-linear-to-t from-space-dark/60 to-transparent" />
       </div>
 
       {/* ── Broken Grid: Science (7) + Religion (5) ── */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 mb-16 md:mb-24">
-        {/* Science Panel — 7 columns */}
-        <div className="md:col-span-7 scroll-reveal">
+        
+        {/* Mobile Tab Toggle - Only visible on mobile */}
+        <div className="col-span-1 md:hidden mb-2">
+          <div className="flex gap-2 p-1 bg-surface-high/50 rounded-xl">
+            <button
+              onClick={() => setActiveMobileTab('science')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                activeMobileTab === 'science' 
+                  ? 'bg-science text-space-dark' 
+                  : 'text-text-dim hover:text-text-primary'
+              }`}
+            >
+              <FlaskConical className="w-4 h-4" />
+              Sains
+            </button>
+            <button
+              onClick={() => setActiveMobileTab('religion')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                activeMobileTab === 'religion' 
+                  ? 'bg-reflection text-space-dark' 
+                  : 'text-text-dim hover:text-text-primary'
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              Agama
+            </button>
+          </div>
+        </div>
+
+        {/* Science Panel — 7 columns (hidden on mobile when religion tab active) */}
+        <div className={`md:col-span-7 scroll-reveal ${activeMobileTab !== 'science' ? 'hidden md:block' : ''}`}>
           <GlassCard className="h-full">
             <div className="flex items-center gap-3 mb-6">
               <FlaskConical className="w-5 h-5 text-science" />
@@ -123,21 +155,21 @@ export function EksplorasiPage() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: 'Science', icon: FlaskConical, val: phenomenon.stem.science, color: 'text-science', bg: 'bg-science/5' },
                   { label: 'Technology', icon: Cpu, val: phenomenon.stem.technology, color: 'text-ai-accent', bg: 'bg-ai-accent/5' },
                   { label: 'Engineering', icon: Rocket, val: phenomenon.stem.engineering, color: 'text-reflection', bg: 'bg-reflection/5' },
                   { label: 'Mathematics', icon: Calculator, val: phenomenon.stem.mathematics, color: 'text-blue-400', bg: 'bg-blue-400/5' }
                 ].map((item, idx) => (
-                  <div key={idx} className={`${item.bg} p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-colors group`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <item.icon className={`w-4 h-4 ${item.color} group-hover:scale-110 transition-transform`} />
-                      <span className="font-[Space_Grotesk,sans-serif] text-[10px] uppercase tracking-widest font-bold text-text-dim">
+                  <div key={idx} className={`${item.bg} p-3 md:p-5 rounded-xl md:rounded-2xl border border-white/5 hover:border-white/10 transition-colors group`}>
+                    <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                      <item.icon className={`w-3.5 h-3.5 md:w-4 md:h-4 ${item.color} group-hover:scale-110 transition-transform`} />
+                      <span className="font-[Space_Grotesk,sans-serif] text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-text-dim">
                         {item.label}
                       </span>
                     </div>
-                    <p className="font-[Manrope,sans-serif] text-sm text-text-muted leading-relaxed">
+                    <p className="font-[Manrope,sans-serif] text-xs md:text-sm text-text-muted leading-relaxed line-clamp-3 md:line-clamp-none">
                       {item.val}
                     </p>
                   </div>
@@ -160,8 +192,8 @@ export function EksplorasiPage() {
           </GlassCard>
         </div>
 
-        {/* Religion Panel — 5 columns, overlapping with negative margin */}
-        <div className="md:col-span-5 md:-ms-8 md:mt-16 z-10 scroll-reveal">
+        {/* Religion Panel — 5 columns (hidden on mobile when science tab active) */}
+        <div className={`md:col-span-5 md:mt-8 lg:mt-16 z-10 scroll-reveal ${activeMobileTab !== 'religion' ? 'hidden md:block' : ''}`}>
           <GlassCard className="bg-surface-low/80 border-s-4 border-s-reflection">
             <div className="flex items-center gap-3 mb-6">
               <BookOpen className="w-5 h-5 text-reflection" />
@@ -218,7 +250,7 @@ export function EksplorasiPage() {
         </div>
         
         {/* Masonry-style asymmetric grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[500px] lg:h-[600px] min-h-[350px]">
           <div className="md:col-span-8 h-full rounded-2xl overflow-hidden relative group">
             <img src={phenomenon.heroImage} alt="Visual utama" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bg-space-dark/20 group-hover:bg-transparent transition-colors" />
@@ -284,7 +316,7 @@ export function EksplorasiPage() {
             <Link
               key={p.id}
               to={`/eksplorasi?id=${p.id}`}
-              className="snap-center shrink-0 w-[80vw] md:w-[400px] group"
+              className="snap-center shrink-0 w-[85vw] max-w-[400px] group"
             >
               <GlassCard hover className="h-full">
                 <div className="h-40 rounded-xl overflow-hidden mb-4 relative">
