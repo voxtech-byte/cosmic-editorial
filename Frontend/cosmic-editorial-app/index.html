@@ -7,8 +7,17 @@
     <title>Cosmic Editorial — Fenomena Luar Angkasa</title>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 
-    <!-- Puter.js SDK for AI fallback -->
-    <script src="https://js.puter.com/v2/" defer></script>
+    <!-- Resource Hints untuk Performance -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical font untuk mencegah FOUT -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXskPMBBSSJLm2E.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Puter.js SDK for AI fallback (async) -->
+    <script src="https://js.puter.com/v2/" defer async></script>
   </head>
   <body>
     <div id="root"></div>

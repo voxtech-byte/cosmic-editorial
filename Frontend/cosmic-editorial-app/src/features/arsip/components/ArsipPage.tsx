@@ -5,6 +5,14 @@ import { ArabicText } from '@/shared/ui/ArabicText';
 import { PHENOMENA, CATEGORY_META } from '@/entities/phenomena';
 import { ArrowRight, ExternalLink, FlaskConical } from 'lucide-react';
 
+// Helper untuk optimasi Unsplash URL
+function getOptimizedImageUrl(url: string, width: number): string {
+  if (url.includes('images.unsplash.com')) {
+    return `${url}&w=${width}&q=80&fm=webp`;
+  }
+  return url;
+}
+
 /** Archive page — all phenomena with bento layout + horizontal scroller */
 export function ArsipPage() {
   useEffect(() => {
@@ -51,9 +59,13 @@ export function ArsipPage() {
               <GlassCard hover className="h-full flex flex-col p-0 overflow-hidden transition-all duration-500 hover:border-science/30">
                 {/* Card Image Banner */}
                 <div className={`md:${index === 0 ? 'h-80' : 'h-48'} ${mobileHeight} w-full relative overflow-hidden`}>
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 bg-[image:var(--bg-image)]"
-                    style={{ '--bg-image': `url('${phenomenon.heroImage}')` } as React.CSSProperties}
+                  <img
+                    src={getOptimizedImageUrl(phenomenon.heroImage, index === 0 ? 800 : 400)}
+                    alt={phenomenon.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    width={index === 0 ? 800 : 400}
+                    height={index === 0 ? 600 : 300}
+                    loading={index < 2 ? "eager" : "lazy"}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-surface-high via-transparent to-transparent" />
                   

@@ -1,5 +1,9 @@
-/* ── Google Fonts ───────────────────────────────────────────── */
+/* ── Google Fonts dengan display=swap untuk FCP ─────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400&family=Manrope:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap');
+
+/* Preconnect ke Google Fonts untuk mempercepat loading */
+@import url('https://fonts.googleapis.com');
+@import url('https://fonts.gstatic.com');
 
 @import "tailwindcss";
 
@@ -239,5 +243,21 @@
   .overflow-y-auto,
   .overflow-x-auto {
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Disable scroll-reveal on mobile (use instant) */
+  .scroll-reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Reduce backdrop blur further on low-end devices */
+  @media (max-width: 480px) {
+    .glass-panel {
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      background: rgba(33, 31, 36, 0.7);
+    }
   }
 }

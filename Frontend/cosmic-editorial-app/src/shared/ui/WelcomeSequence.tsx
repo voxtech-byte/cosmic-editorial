@@ -1,28 +1,71 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+// Preload images untuk memastikan semua asset siap sebelum scene muncul
+function preloadImages(urls: string[]): Promise<void> {
+  return Promise.all(
+    urls.map((url) =>
+      new Promise<void>((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => resolve(); // Lanjutkan meski error (fallback)
+        img.src = url;
+      })
+    )
+  ).then(() => undefined);
+}
 
 export function WelcomeSequence() {
-  // 0 = Initial, 1 = School, 3 = Referensi, 4 = Done/Hidden
+  // 0 = Initial/Loading, 1 = School, 3 = Referensi, 4 = Done/Hidden
   const [step, setStep] = useState(0);
   const [isVisible, setIsVisible] = useState(() => !sessionStorage.getItem('hasSeenWelcome'));
+  const [isLoading, setIsLoading] = useState(true);
+  const sceneStartTime = useRef<number>(0);
+
+  // Assets yang perlu di-preload
+  const teamImages = [
+    '/LOGO MTs.png',
+    '/Alya.jpeg',
+    '/nayla amalia.jpeg',
+    '/Michel.jpeg',
+    '/NASA LOGO.png',
+    '/ESA LOGO.png',
+    '/LOGO QURAN.png'
+  ];
 
   useEffect(() => {
     // Jika sudah pernah dilihat, tidak perlu jalankan sequence
     if (!isVisible) return;
 
-    // Sequence Timing
-    const s1 = setTimeout(() => setStep(1), 800);   // Mulai animasi perlahan
-    const s3 = setTimeout(() => setStep(3), 4500);  // Pindah ke Referensi
-    const s4 = setTimeout(() => {
-      setStep(4);
-      sessionStorage.setItem('hasSeenWelcome', 'true');
-      setTimeout(() => setIsVisible(false), 2000); // Tunggu animasi fade-out selesai utuh
-    }, 8500);
+    // Preload semua image dulu
+    preloadImages(teamImages).then(() => {
+      setIsLoading(false);
+      sceneStartTime.current = Date.now();
 
-    return () => {
-      clearTimeout(s1);
-      clearTimeout(s3);
-      clearTimeout(s4);
-    };
+      // Scene 1: School & Team - minimal 3 detik display
+      const s1 = setTimeout(() => {
+        setStep(1);
+        sceneStartTime.current = Date.now();
+      }, 300);
+
+      // Scene 3: Referensi - minimal 4 detik setelah Scene 1
+      const s3 = setTimeout(() => {
+        setStep(3);
+        sceneStartTime.current = Date.now();
+      }, 4000); // 300ms fade in + 3700ms display
+
+      // Scene 4: Done
+      const s4 = setTimeout(() => {
+        setStep(4);
+        sessionStorage.setItem('hasSeenWelcome', 'true');
+        setTimeout(() => setIsVisible(false), 1500);
+      }, 8500);
+
+      return () => {
+        clearTimeout(s1);
+        clearTimeout(s3);
+        clearTimeout(s4);
+      };
+    });
   }, [isVisible]);
 
   if (!isVisible) return null;
@@ -53,10 +96,20 @@ export function WelcomeSequence() {
 
       <div className="relative z-10 w-full max-w-4xl px-6 text-center">
         
+        {/* ── Loading State ── */}
+        {isLoading && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="w-12 h-12 border-2 border-science/20 border-t-science rounded-full animate-spin mb-4" />
+            <p className="font-[Space_Grotesk,sans-serif] text-xs text-text-dim uppercase tracking-widest">
+              Memuat...
+            </p>
+          </div>
+        )}
+        
         {/* ── Scene 1: School & Team ── */}
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1500 ease-in-out ${
-            step === 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+          className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ease-out md:duration-1000 ${
+            step === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
           <div className="mb-8 relative group">
@@ -84,7 +137,8 @@ export function WelcomeSequence() {
                     src={member.img}
                     alt={member.name}
                     className={`w-full h-full object-cover ${member.pos} grayscale group-hover/member:grayscale-0 transition-all duration-700 scale-105 group-hover/member:scale-100`}
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
                 <span className="font-[Space_Grotesk,sans-serif] text-[10px] md:text-xs font-bold tracking-widest text-text-muted uppercase group-hover/member:text-science transition-colors line-clamp-1 text-center w-full">
@@ -97,8 +151,8 @@ export function WelcomeSequence() {
 
         {/* ── Scene 3: References ── */}
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1500 ease-in-out ${
-            step === 3 ? 'opacity-100 scale-100 delay-500' : 'opacity-0 scale-105 pointer-events-none delay-0'
+          className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ease-out md:duration-1000 ${
+            step === 3 ? 'opacity-100 delay-300' : 'opacity-0 pointer-events-none delay-0'
           }`}
         >
           <p className="font-[Space_Grotesk,sans-serif] text-sm text-text-dim tracking-[0.2em] uppercase mb-12">
