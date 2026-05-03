@@ -43,6 +43,14 @@ export function LinkPreviewCard({
   }
 
   if (error) {
+    const displayUrl = (() => {
+      try {
+        return new URL(url).hostname;
+      } catch {
+        return url;
+      }
+    })();
+
     return (
       <a
         href={url}
@@ -52,7 +60,7 @@ export function LinkPreviewCard({
       >
         <div className="flex items-center gap-3 text-text-dim">
           <Globe className="w-5 h-5" />
-          <span className="text-sm truncate">{url}</span>
+          <span className="text-sm truncate">{displayUrl}</span>
           <ExternalLink className="w-4 h-4 ml-auto" />
         </div>
       </a>
@@ -122,7 +130,13 @@ export function LinkPreviewCard({
         )}
 
         <p className="text-xs text-text-dim mt-3 truncate">
-          {new URL(url).hostname}
+          {(() => {
+            try {
+              return new URL(url).hostname;
+            } catch {
+              return url;
+            }
+          })()}
         </p>
       </div>
     </a>
