@@ -3,12 +3,22 @@ import { useLinkPreview } from '@/shared/hooks/useLinkPreview';
 import { Globe, Briefcase, Code2 } from 'lucide-react';
 
 // Data project untuk UpWork portfolio
-const projects = [
+// Tambahkan image: '/path/to/screenshot.png' untuk custom thumbnail
+interface Project {
+  id: number;
+  url: string;
+  category: string;
+  technologies: string[];
+  image?: string;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     url: 'https://cosmic-editorial.vercel.app/',
     category: 'Web Development',
     technologies: ['React', 'TypeScript', 'TailwindCSS'],
+    // image: '/screenshots/cosmic-editorial.png', // Uncomment untuk custom thumbnail
   },
 ];
 
@@ -16,16 +26,30 @@ interface ProjectCardProps {
   url: string;
   category: string;
   technologies: string[];
+  customImage?: string;
 }
 
-function ProjectCard({ url, category, technologies }: ProjectCardProps) {
+function ProjectCard({ url, category, technologies, customImage }: ProjectCardProps) {
   const { data: previewData, isLoading, error } = useLinkPreview(url);
+
+  // Merge preview data dengan custom image (jika ada)
+  const mergedPreviewData = previewData ? {
+    ...previewData,
+    images: customImage ? [customImage] : previewData.images,
+  } : customImage ? {
+    url,
+    title: 'Cosmic Editorial',
+    siteName: 'cosmic-editorial.vercel.app',
+    description: 'Interactive space education platform built with React and TypeScript',
+    images: [customImage],
+    favicons: [],
+  } : undefined;
 
   return (
     <div className="space-y-3">
       <LinkPreviewCard
         url={url}
-        previewData={previewData}
+        previewData={mergedPreviewData}
         isLoading={isLoading}
         error={error?.message || null}
       />
@@ -76,6 +100,7 @@ export function PortfolioProjects() {
             url={project.url}
             category={project.category}
             technologies={project.technologies}
+            customImage={project.image}
           />
         ))}
       </div>

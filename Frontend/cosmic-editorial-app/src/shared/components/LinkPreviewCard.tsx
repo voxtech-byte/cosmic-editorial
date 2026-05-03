@@ -67,12 +67,17 @@ export function LinkPreviewCard({
     );
   }
 
-  if (!previewData) return null;
-
-  const imageUrl = previewData.images?.[0] || (previewData as {image?: {url?: string}}).image?.url;
-  const faviconUrl = previewData.favicons?.[0] || (previewData as {logo?: {url?: string}}).logo?.url;
-  const displayTitle = previewData.title || previewData.siteName || url;
-  const displayDescription = previewData.description;
+  // Handle empty preview data - still show card with URL
+  const imageUrl = previewData?.images?.[0] || (previewData as {image?: {url?: string}})?.image?.url;
+  const faviconUrl = previewData?.favicons?.[0] || (previewData as {logo?: {url?: string}})?.logo?.url;
+  const displayTitle = previewData?.title || previewData?.siteName || (() => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '');
+    } catch {
+      return url;
+    }
+  })();
+  const displayDescription = previewData?.description || 'Click to visit the project';
 
   return (
     <a
@@ -116,7 +121,7 @@ export function LinkPreviewCard({
             <h3 className="font-semibold text-text-primary line-clamp-2 group-hover:text-science transition-colors">
               {displayTitle}
             </h3>
-            {previewData.siteName && (
+            {previewData?.siteName && (
               <p className="text-sm text-text-dim mt-0.5">{previewData.siteName}</p>
             )}
           </div>
