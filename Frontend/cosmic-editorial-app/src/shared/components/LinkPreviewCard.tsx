@@ -69,8 +69,8 @@ export function LinkPreviewCard({
 
   if (!previewData) return null;
 
-  const imageUrl = previewData.images?.[0];
-  const faviconUrl = previewData.favicons?.[0];
+  const imageUrl = previewData.images?.[0] || (previewData as {image?: {url?: string}}).image?.url;
+  const faviconUrl = previewData.favicons?.[0] || (previewData as {logo?: {url?: string}}).logo?.url;
   const displayTitle = previewData.title || previewData.siteName || url;
   const displayDescription = previewData.description;
 

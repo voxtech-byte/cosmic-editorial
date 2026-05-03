@@ -1,5 +1,3 @@
-const { getLinkPreview } = require('link-preview-js');
-
 module.exports = async (req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,13 +26,29 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const previewData = await getLinkPreview(url, {
-      followRedirects: 'follow',
-      timeout: 10000,
-      headers: {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      },
-    });
+    // Use microlink.io API (free tier, no API key needed for basic usage)
+    const apiUrl = `https://api.microlink.io/?url=${encodeURIComponent(url)}`;
+    
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.status === 'fail') {
+      return res.status(400).json({
+        error: 'Failed to fetch preview',
+        message: data.message || 'Could not extract preview data'
+      });
+    }
+
+    // Transform microlink response to match link-preview-js format
+    const previewData = {
+      url: data.data.url,
+      title: data.data.title,
+      description: data.data.description,
+      siteName: data.data.publisher,
+      images: data.data.image?.url ? [data.data.image.url] : [],
+      favicons: data.data.logo?.url ? [data.data.logo.url] : [],
+      mediaType: data.data.type || 'website',
+    };
 
     return res.status(200).json(previewData);
   } catch (error) {
