@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vercel/node": "^5.7.15",
+    "link-preview-js": "^4.0.1"
+  }
+}

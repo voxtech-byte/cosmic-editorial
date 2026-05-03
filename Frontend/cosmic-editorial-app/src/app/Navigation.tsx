@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Compass, MessageSquare, Archive } from 'lucide-react';
+import { Home, Compass, MessageSquare, Archive, Briefcase } from 'lucide-react';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Beranda', icon: Home },
   { to: '/eksplorasi', label: 'Eksplorasi', icon: Compass },
   { to: '/asisten', label: 'Asisten AI', icon: MessageSquare },
   { to: '/arsip', label: 'Arsip', icon: Archive },
+  { to: '/portfolio', label: 'Portfolio', icon: Briefcase },
 ] as const;
 
 /** Single navigation pattern: Top navbar (desktop) + Bottom dock (mobile) */
