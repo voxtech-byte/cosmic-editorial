@@ -591,27 +591,94 @@ export function BerandaPage() {
           })}
         </div>
 
-        {/* DESKTOP: All Cards Expanded */}
+        {/* DESKTOP: Expandable Hybrid Cards */}
         <div className="hidden md:grid md:grid-cols-3 gap-4">
-          {FISIKA_PILLARS.map((pilar) => (
-            <GlassCard 
-              key={pilar.id} 
-              className="relative overflow-hidden p-6"
-            >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 pointer-events-none opacity-100 ${pilar.id === 'klasik' ? 'bg-science/5' : pilar.id === 'modern' ? 'bg-reflection/5' : 'bg-ai-accent/5'}`} />
+          {FISIKA_PILLARS.map((pilar) => {
+            const isExpanded = expandedCard === pilar.id;
+            
+            return (
+              <GlassCard 
+                key={pilar.id} 
+                className={`relative overflow-hidden transition-all duration-500 ${
+                  isExpanded ? 'md:col-span-2 p-8' : 'p-6'
+                }`}
+              >
+                {/* Background Gradient - pointer-events-none so it doesn't block clicks */}
+                <div className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${isExpanded ? 'opacity-100 ' + (pilar.id === 'klasik' ? 'bg-science/5' : pilar.id === 'modern' ? 'bg-reflection/5' : 'bg-ai-accent/5') : 'opacity-0'}`} />
                 
-                {/* Expanded Content */}
-                <div>
-                  {/* Header */}
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className={`shrink-0 w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center text-4xl ${pilar.id === 'klasik' ? 'bg-science/20' : pilar.id === 'modern' ? 'bg-reflection/20' : 'bg-ai-accent/20'}`}>
+                {/* Compact View */}
+                <div className={`transition-all duration-500 ${isExpanded ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
+                  <div className="flex flex-col items-center text-center">
+                    <div className={`w-20 h-20 rounded-3xl border border-white/10 flex items-center justify-center text-5xl mb-4 shadow-lg transition-transform hover:scale-110 ${pilar.id === 'klasik' ? 'bg-science/20' : pilar.id === 'modern' ? 'bg-reflection/20' : 'bg-ai-accent/20'}`}>
                       {pilar.icon}
                     </div>
-                    <div>
-                      <h3 className="font-[Space_Grotesk,sans-serif] font-bold text-text-primary text-2xl">{pilar.title}</h3>
-                      <p className="text-sm text-text-dim">{pilar.subtitle}</p>
+                    <h3 className="font-[Space_Grotesk,sans-serif] font-bold text-text-primary text-xl mb-2">
+                      {pilar.title}
+                    </h3>
+                    <p className="text-sm text-text-dim mb-3">{pilar.subtitle}</p>
+                    <p className="text-sm text-text-muted line-clamp-3 mb-4">
+                      {pilar.desc}
+                    </p>
+                    
+                    {/* Quick Preview */}
+                    <div className="w-full space-y-2">
+                      <div className={`rounded-lg p-3 ${pilar.id === 'klasik' ? 'bg-science/10' : pilar.id === 'modern' ? 'bg-reflection/10' : 'bg-ai-accent/10'}`}>
+                        <p className={`font-mono text-lg font-bold text-center ${pilar.id === 'klasik' ? 'text-science' : pilar.id === 'modern' ? 'text-reflection' : 'text-ai-accent'}`}>
+                          {pilar.formulas[0].eq}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-center gap-2 text-xs text-text-dim">
+                        <span>+{pilar.concepts.length} konsep</span>
+                        <span>•</span>
+                        <span>+{pilar.scientists.length} ilmuwan</span>
+                      </div>
                     </div>
+                    
+                    {/* Expand Button */}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleExpand(pilar.id); }}
+                      className={`mt-4 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 pointer-events-auto z-10 relative ${
+                        pilar.id === 'klasik' ? 'bg-science/30 hover:bg-science/50 text-science' : 
+                        pilar.id === 'modern' ? 'bg-reflection/30 hover:bg-reflection/50 text-reflection' : 
+                        'bg-ai-accent/30 hover:bg-ai-accent/50 text-ai-accent'
+                      }`}
+                    >
+                      <svg className="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    
+                    <p className="text-xs text-text-dim mt-2 uppercase tracking-wider">
+                      Klik panah untuk detail
+                    </p>
+                  </div>
+                </div>
+
+                {/* Expanded View */}
+                <div className={`transition-all duration-500 ${isExpanded ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+                  {/* Header with Collapse Button */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-start gap-4">
+                      <div className={`shrink-0 w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center text-4xl ${pilar.id === 'klasik' ? 'bg-science/20' : pilar.id === 'modern' ? 'bg-reflection/20' : 'bg-ai-accent/20'}`}>
+                        {pilar.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-[Space_Grotesk,sans-serif] font-bold text-text-primary text-2xl">{pilar.title}</h3>
+                        <p className="text-sm text-text-dim">{pilar.subtitle}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleExpand(pilar.id); }}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 pointer-events-auto z-10 relative ${
+                        pilar.id === 'klasik' ? 'bg-science/30 hover:bg-science/50 text-science' : 
+                        pilar.id === 'modern' ? 'bg-reflection/30 hover:bg-reflection/50 text-reflection' : 
+                        'bg-ai-accent/30 hover:bg-ai-accent/50 text-ai-accent'
+                      }`}
+                    >
+                      <svg className="w-6 h-6 rotate-180 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-8">
@@ -694,9 +761,29 @@ export function BerandaPage() {
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Collapse hint */}
+                  <div className="flex flex-col items-center mt-6">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleExpand(pilar.id); }}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 pointer-events-auto z-10 relative mb-2 ${
+                        pilar.id === 'klasik' ? 'bg-science/30 hover:bg-science/50 text-science' : 
+                        pilar.id === 'modern' ? 'bg-reflection/30 hover:bg-reflection/50 text-reflection' : 
+                        'bg-ai-accent/30 hover:bg-ai-accent/50 text-ai-accent'
+                      }`}
+                    >
+                      <svg className="w-6 h-6 rotate-180 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <p className="text-xs text-text-dim uppercase tracking-wider">
+                      Klik panah untuk menutup
+                    </p>
+                  </div>
                 </div>
               </GlassCard>
-          ))}
+            );
+          })}
         </div>
 
         {/* Integration Quote */}
