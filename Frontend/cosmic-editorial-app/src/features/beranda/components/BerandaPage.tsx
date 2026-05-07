@@ -594,94 +594,108 @@ export function BerandaPage() {
         {/* DESKTOP: All Cards Expanded */}
         <div className="hidden md:grid md:grid-cols-3 gap-4">
           {FISIKA_PILLARS.map((pilar) => (
-            <GlassCard key={pilar.id} className="relative overflow-hidden p-6">
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 pointer-events-none ${pilar.id === 'klasik' ? 'bg-science/5' : pilar.id === 'modern' ? 'bg-reflection/5' : 'bg-ai-accent/5'}`} />
-              
-              {/* Header */}
-              <div className="flex items-start gap-4 mb-6">
-                <div className={`shrink-0 w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center text-4xl ${pilar.id === 'klasik' ? 'bg-science/20' : pilar.id === 'modern' ? 'bg-reflection/20' : 'bg-ai-accent/20'}`}>
-                  {pilar.icon}
-                </div>
+            <GlassCard 
+              key={pilar.id} 
+              className="relative overflow-hidden p-6"
+            >
+                {/* Background Gradient */}
+                <div className={`absolute inset-0 pointer-events-none opacity-100 ${pilar.id === 'klasik' ? 'bg-science/5' : pilar.id === 'modern' ? 'bg-reflection/5' : 'bg-ai-accent/5'}`} />
+                
+                {/* Expanded Content */}
                 <div>
-                  <h3 className="font-[Space_Grotesk,sans-serif] font-bold text-text-primary text-2xl">{pilar.title}</h3>
-                  <p className="text-sm text-text-dim">{pilar.subtitle}</p>
-                </div>
-              </div>
-              
-              {/* Description */}
-              <p className="text-sm text-text-muted font-[Manrope,sans-serif] leading-relaxed mb-4">
-                {pilar.desc}
-              </p>
-
-              {/* Quote */}
-              <div className={`rounded-xl p-4 border-l-4 mb-4 ${pilar.id === 'klasik' ? 'bg-science/10 border-science' : pilar.id === 'modern' ? 'bg-reflection/10 border-reflection' : 'bg-ai-accent/10 border-ai-accent'}`}>
-                <p className="text-sm text-text-primary italic mb-2">
-                  "{pilar.id === 'klasik' ? 'If I have seen further, it is by standing on the shoulders of giants.' : pilar.id === 'modern' ? 'The important thing is not to stop questioning.' : 'Somewhere, something incredible is waiting to be known.'}"
-                </p>
-                <p className="text-xs text-text-dim">— {pilar.scientists[0].name}</p>
-              </div>
-
-              {/* Concepts */}
-              <div className="mb-4">
-                <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Konsep Kunci</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {pilar.concepts.map((concept, j) => (
-                    <div key={j} className={`rounded-lg p-3 border border-white/5 ${pilar.id === 'klasik' ? 'bg-science/10' : pilar.id === 'modern' ? 'bg-reflection/10' : 'bg-ai-accent/10'}`}>
-                      <p className="text-xs font-bold text-text-primary">{concept.name}</p>
-                      <p className="text-[10px] text-text-dim">{concept.desc}</p>
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className={`shrink-0 w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center text-4xl ${pilar.id === 'klasik' ? 'bg-science/20' : pilar.id === 'modern' ? 'bg-reflection/20' : 'bg-ai-accent/20'}`}>
+                      {pilar.icon}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Formulas */}
-              <div className="mb-4">
-                <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Rumus Fundamental</p>
-                <div className="space-y-2">
-                  {pilar.formulas.map((formula, j) => (
-                    <div key={j} className={`border border-white/10 rounded-lg p-3 ${pilar.id === 'klasik' ? 'bg-science/15' : pilar.id === 'modern' ? 'bg-reflection/15' : 'bg-ai-accent/15'}`}>
-                      <p className={`font-mono text-base font-bold text-center ${pilar.id === 'klasik' ? 'text-science' : pilar.id === 'modern' ? 'text-reflection' : 'text-ai-accent'}`}>
-                        {formula.eq}
+                    <div>
+                      <h3 className="font-[Space_Grotesk,sans-serif] font-bold text-text-primary text-2xl">{pilar.title}</h3>
+                      <p className="text-sm text-text-dim">{pilar.subtitle}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Left: Description */}
+                    <div>
+                      
+                      <p className="text-sm text-text-muted font-[Manrope,sans-serif] leading-relaxed mb-6">
+                        {pilar.desc}
                       </p>
-                      <p className="text-[10px] text-text-dim text-center">{formula.name}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Scientists */}
-              <div>
-                <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Tokoh Penting</p>
-                <div className="space-y-2">
-                  {pilar.scientists.map((scientist, j) => (
-                    <div key={j} className="flex items-center gap-3 p-2 rounded-lg bg-surface-high/30">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 shrink-0 bg-surface-high flex items-center justify-center">
-                        <img 
-                          src={scientist.img} 
-                          alt={scientist.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            target.parentElement!.innerHTML = '<span class="text-lg">👤</span>';
-                          }}
-                        />
+                      {/* Quote */}
+                      <div className={`rounded-xl p-4 border-l-4 ${pilar.id === 'klasik' ? 'bg-science/10 border-science' : pilar.id === 'modern' ? 'bg-reflection/10 border-reflection' : 'bg-ai-accent/10 border-ai-accent'}`}>
+                        <p className="text-sm text-text-primary italic mb-2">
+                          "{pilar.id === 'klasik' ? 'If I have seen further, it is by standing on the shoulders of giants.' : pilar.id === 'modern' ? 'The important thing is not to stop questioning.' : 'Somewhere, something incredible is waiting to be known.'}"
+                        </p>
+                        <p className="text-xs text-text-dim">— {pilar.scientists[0].name}</p>
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs font-bold text-text-primary truncate">{scientist.name}</p>
-                        <div className="flex items-center justify-between">
-                          <p className="text-[10px] text-text-dim">{scientist.year}</p>
-                          <span className={`text-[10px] font-medium ${pilar.id === 'klasik' ? 'text-science' : pilar.id === 'modern' ? 'text-reflection' : 'text-ai-accent'}`}>
-                            {scientist.contrib}
-                          </span>
+                    </div>
+
+                    {/* Right: Details */}
+                    <div>
+                      {/* Concepts */}
+                      <div className="mb-4">
+                        <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Konsep Kunci</p>
+                        <div className="grid grid-cols-2 gap-2">
+                          {pilar.concepts.map((concept, j) => (
+                            <div key={j} className={`rounded-lg p-3 border border-white/5 ${pilar.id === 'klasik' ? 'bg-science/10' : pilar.id === 'modern' ? 'bg-reflection/10' : 'bg-ai-accent/10'}`}>
+                              <p className="text-xs font-bold text-text-primary">{concept.name}</p>
+                              <p className="text-[10px] text-text-dim">{concept.desc}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Formulas */}
+                      <div className="mb-4">
+                        <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Rumus Fundamental</p>
+                        <div className="space-y-2">
+                          {pilar.formulas.map((formula, j) => (
+                            <div key={j} className={`border border-white/10 rounded-lg p-3 ${pilar.id === 'klasik' ? 'bg-science/15' : pilar.id === 'modern' ? 'bg-reflection/15' : 'bg-ai-accent/15'}`}>
+                              <p className={`font-mono text-base font-bold text-center ${pilar.id === 'klasik' ? 'text-science' : pilar.id === 'modern' ? 'text-reflection' : 'text-ai-accent'}`}>
+                                {formula.eq}
+                              </p>
+                              <p className="text-[10px] text-text-dim text-center">{formula.name}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Scientists */}
+                      <div>
+                        <p className="text-xs uppercase tracking-wider text-text-dim mb-2">Tokoh Penting</p>
+                        <div className="space-y-2">
+                          {pilar.scientists.map((scientist, j) => (
+                            <div key={j} className="flex items-center gap-3 p-2 rounded-lg bg-surface-high/30">
+                              <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 shrink-0 bg-surface-high flex items-center justify-center">
+                                <img 
+                                  src={scientist.img} 
+                                  alt={scientist.name}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    target.parentElement!.innerHTML = '<span class="text-lg">👤</span>';
+                                  }}
+                                />
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <p className="text-xs font-bold text-text-primary truncate">{scientist.name}</p>
+                                <div className="flex items-center justify-between">
+                                  <p className="text-[10px] text-text-dim">{scientist.year}</p>
+                                  <span className={`text-[10px] font-medium ${pilar.id === 'klasik' ? 'text-science' : pilar.id === 'modern' ? 'text-reflection' : 'text-ai-accent'}`}>
+                                    {scientist.contrib}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </GlassCard>
+              </GlassCard>
           ))}
         </div>
 
